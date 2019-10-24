@@ -1,0 +1,6 @@
+com/api/resources/resources.class
+com/we/api/utilities/excelreader.class
+com/we/api/utilities/ExtentReporterNG.class
+com/we/api/utilities/DataAccessConf.class
+com/we/api/utilities/reports.class
+com/api/pojo/Address.class
