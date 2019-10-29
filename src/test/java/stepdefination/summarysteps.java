@@ -32,9 +32,15 @@ public class summarysteps {
 	Scenario scenario;
 	//private excelreader data;
 	public List<HashMap<String,String>> datamap;
+	/*
 	public summarysteps()
 	{
 
+		datamap = DataHelper.data("./src/main/resources/BCC_DataSheet1.xlsx","DataSheet1");
+	}*/
+
+	@Before
+	public void beforeScenario(){
 		datamap = DataHelper.data("./src/main/resources/BCC_DataSheet1.xlsx","DataSheet1");
 	}
 
