@@ -2,6 +2,7 @@ package stepdefination;
 
 import static io.restassured.RestAssured.given;
 
+import com.we.api.utilities.DataHelper;
 import org.testng.Assert;
 
 import com.api.pojo.Address;
@@ -19,6 +20,9 @@ import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class summarysteps {
 	
 	private Response response;
@@ -27,62 +31,47 @@ public class summarysteps {
 	private RequestSpecification request;
 	Scenario scenario;
 	//private excelreader data;
+	public List<HashMap<String,String>> datamap;
+	public summarysteps()
+	{
 
-	@Before
-	public void before(Scenario scenario) {
-	    this.scenario = scenario;
+		datamap = DataHelper.data("./src/main/resources/BCC_DataSheet1.xlsx","DataSheet1");
 	}
 
 
+	@Given("^customer provides find_one endpoint with valid address at excel row \"([^\"]*)\" dataset$")
+	public void customer_provides_find_one_endpoint_with_valid_address_at_excel_row_dataset(String arg1) throws Throwable {
+		int index = Integer.parseInt(arg1)-1;
+
+		RestAssured.baseURI=DataAccessConf.get().gethost();
+
+		Address address=new Address(datamap.get(index).get("Firstname"),datamap.get(index).get("LastName"),datamap.get(index).get("Address"),datamap.get(index).get("City"),datamap.get(index).get("State"),datamap.get(index).get("Zip"));
+
+		request=given().
+				header("Content-Type","application/json").
+				header("authorization",DataAccessConf.get().getapikey()).
+				request().body(address).log().body().log().uri().log().headers();
+
+	}
+
+	@When("^post request to find_one basic$")
+	public void post_request_to_find_one_basic() throws Throwable {
+		response = request.when().post(resources.getfindonebyaddressbybasic());
+		System.out.println("response: " + response.prettyPrint());
+	}
+
+	@Then("^the status code should be matching at excel row \"([^\"]*)\"$")
+	public void the_status_code_should_be_matching_at_excel_row(String arg1) throws Throwable {
+		int index = Integer.parseInt(arg1)-1;
+		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode")));
+	}
 
 
-@Then("^validateresponse \"([^\"]*)\"$")
-public void validateresponse(String arg1) throws Throwable {
-	Assert.assertEquals(response.body().jsonPath().getJsonObject(arg1).toString() /*actual value*/, "2|3 - Above Average" /*expected value*/, "Data not matching with API response");
-}
-
-
-@Given("^A valid api key and Address for SummaryApi$")
-public void a_valid_api_key_and_Address_for_SummaryApi() throws Throwable {
-
-	        RestAssured.baseURI=DataAccessConf.get().gethost();
-            Address address=new Address("John","Kimberlin","5940 Via Real","Carpinteria","CA","93013");
-	        request=given().
-		    header("Content-Type","application/json").
-			header("authorization",DataAccessConf.get().getapikey()).
-			request().body(address);
-}
-@Given("^Prepare the request for summary api with Address \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
-public void prepare_the_request_for_summary_api_with_Address(String fname, String lname, String adress, String city, String state, String zip) throws Throwable {
-	excelreader data=new excelreader();  
-	    String fname1=data.get(scenario.getName(), fname);
-	    System.out.println(fname1);
-	    RestAssured.baseURI=DataAccessConf.get().gethost();
-	    Address address=new Address(data.get(scenario.getName(), fname),data.get(scenario.getName(), lname),data.get(scenario.getName(), adress),data.get(scenario.getName(), city),data.get(scenario.getName(), state),data.get(scenario.getName(), zip));
-	 
-        request=given().
-	    header("Content-Type","application/json").
-		header("authorization",DataAccessConf.get().getapikey()).
-		request().body(address).log().body();
-        //System.out.println("request: " + request().body(address));
-}
-@When("^Invoke the post Api$")
-public void invoke_the_post_Api() throws Throwable {
-	response = request.when().post(resources.getfindonebyaddressbybasic());
-	System.out.println("response: " + response.prettyPrint());
-}
-
-
-
-@Then("^the status code should be \"([^\"]*)\"$")
-public void the_status_code_should_be(String statuscode) throws Throwable 
-{
-	excelreader data=new excelreader();
-	 int code=Integer.parseInt(data.get(scenario.getName(), statuscode));
-	 System.out.println(scenario.getName());
-	 json = response.then().statusCode(code);
-}
-
-
+	@Then("^validateresponse at jsonpath \"([^\"]*)\" and \"([^\"]*)\" at excel row \"([^\"]*)\"$")
+	public void validateresponse_at_jsonpath_and_at_excel_row(String arg1, String arg2, String arg3) throws Throwable {
+		int index = Integer.parseInt(arg3)-1;
+		Assert.assertEquals(response.body().jsonPath().getJsonObject(arg1).toString() /*actual value*/, datamap.get(index).get("P2G-text") /*expected value*/, "P2G score text is matching");
+		Assert.assertEquals(response.body().jsonPath().getJsonObject(arg2).toString() /*actual value*/, datamap.get(index).get("P2G-value") /*expected value*/, "P2G score value is matching");
+	}
 
 }

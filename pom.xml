@@ -1,139 +1,148 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.we.app</groupId>
-  <artifactId>we-restassured</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>we-restassured</name>
-  <url>http://maven.apache.org</url>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.we.app</groupId>
+    <artifactId>we-restassured</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <name>we-restassured</name>
+    <url>http://maven.apache.org</url>
 
 
     <profiles>
-  
-    <profile>
-        <id>PRE</id>  
-        <activation>
-            <activeByDefault/>
-        </activation>
-          <build>
-                 
-          <resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-  <plugins>
-  <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.0</version>
-        <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>testngcucumber.xml</suiteXmlFile>
-          </suiteXmlFiles>
-      
-        </configuration>
-      </plugin>
 
-  </plugins>
-  </build>
-        <properties>
-        <host>https://api-pre.welabs.net</host>
-        <apikey>APIKey 6aec2774-e5da-4c70-af1e-f9ce76e03d3f</apikey>
-     </properties>
-    </profile>
         <profile>
-        <id>PROD9</id>  
-        <properties>
-        <host>https://api9.wealthengine.com</host>
-        <apikey>APIKey 2d855d2c-eb95-4e8d-9c86-ef2daaebcd9a</apikey>
-     </properties>
-       <build>
-         <resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-  <plugins>
-  <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.0</version>
-        <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>testngcucumber.xml</suiteXmlFile>
-          </suiteXmlFiles>
-        </configuration>
-      </plugin>
-  </plugins>
-  </build>
-    </profile>
+            <id>PRE</id>
+            <build>
+
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.0</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>testngcucumber.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+            <properties>
+                <host>https://api-pre.welabs.net</host>
+                <apikey>APIKey 6aec2774-e5da-4c70-af1e-f9ce76e03d3f</apikey>
+            </properties>
+        </profile>
+        <profile>
+            <id>PROD9</id>
+            <properties>
+                <host>https://api9.wealthengine.com</host>
+                <apikey>APIKey 2d855d2c-eb95-4e8d-9c86-ef2daaebcd9a</apikey>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.0</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>testngcucumber.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
-  <dependencies>
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>3.1.1</version>
-      <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>info.cukes</groupId>
-    <artifactId>cucumber-java</artifactId>
-    <version>1.2.5</version>
-</dependency>
-<dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>json-path</artifactId>
-      <version>3.1.1</version>
-</dependency>
-<dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>xml-path</artifactId>
-      <version>3.1.1</version>
-</dependency>
-<dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>json-schema-validator</artifactId>
-      <version>3.1.1</version>
-      <scope>test</scope>
-</dependency>
-<dependency>
-  <groupId>org.testng</groupId>
-  <artifactId>testng</artifactId>
-  <version>6.8</version>
-</dependency>
-<dependency>
-    <groupId>com.aventstack</groupId>
-    <artifactId>extentreports</artifactId>
-    <version>3.0.7</version>
-</dependency>
-  <dependency>
-    <groupId>com.relevantcodes</groupId>
-    <artifactId>extentreports</artifactId>
-    <version>2.41.2</version>
-</dependency>
-<dependency>
+    <dependencies>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>xml-path</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>3.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>3.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.relevantcodes</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>2.41.2</version>
+        </dependency>
+        <dependency>
 
- <groupId>info.cukes</groupId>
+            <groupId>info.cukes</groupId>
 
- <artifactId>cucumber-testng</artifactId>
+            <artifactId>cucumber-testng</artifactId>
 
- <version>1.2.5</version>
+            <version>1.2.5</version>
 
- </dependency>
+        </dependency>
 
-   <dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi</artifactId>
-    <version>3.7</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi-ooxml</artifactId>
-    <version>3.17</version>
-</dependency>
-  </dependencies>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.11-beta3</version>
+        </dependency>
+    </dependencies>
 </project>

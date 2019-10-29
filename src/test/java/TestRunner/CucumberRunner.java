@@ -12,7 +12,14 @@ import cucumber.api.CucumberOptions;
 
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@CucumberOptions(features="src/test/java/features", glue = "stepdefination")
+@CucumberOptions(
+        features="src/test/java/features", glue = "stepdefination",
+        plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json",
+                "junit:target/cucumber-reports/Cucumber.xml",
+                "testng:target/cucumber-reports/TestngCucumber.xml",
+                "html:target/cucumber-reports"}
+)
+
 public class CucumberRunner extends AbstractTestNGCucumberTests
 {
 	
