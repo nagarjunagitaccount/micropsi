@@ -1,6 +1,7 @@
 package com.we.api.utilities;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -21,6 +22,7 @@ public class DataHelper {
 			XSSFWorkbook workbook = new XSSFWorkbook(fs);
 			XSSFSheet sheet = workbook.getSheet(sheetName);
 			Row HeaderRow = sheet.getRow(0);
+
 			for(int i=1;i<sheet.getPhysicalNumberOfRows();i++)
 			{
 				Row currentRow = sheet.getRow(i);
@@ -28,6 +30,7 @@ public class DataHelper {
 				for(int j=0;j<currentRow.getPhysicalNumberOfCells();j++)
 				{
 					Cell currentCell = currentRow.getCell(j);
+					//String cellValue = "";
 					switch (currentCell.getCellType())
 					{
 					case Cell.CELL_TYPE_STRING:
@@ -37,7 +40,15 @@ public class DataHelper {
 
                         case Cell.CELL_TYPE_NUMERIC:
                            // String str= String.valueOf(currentCell.getNumericCellValue()).replace(".0","");
-							currentHash.put(HeaderRow.getCell(j).getStringCellValue(), String.valueOf(currentCell.getNumericCellValue()).replace(".0",""));
+							//System.out.println("cell type -- number"+currentCell.getNumericCellValue());
+							//cellValue =new Double( (currentCell.getNumericCellValue()))+"";
+							//System.out.println(cellValue);
+
+							//System.out.println(new DataFormatter().formatCellValue(currentCell));
+
+							//System.out.println(String.valueOf(new DataFormatter().formatCellValue(currentCell)));
+
+							currentHash.put(HeaderRow.getCell(j).getStringCellValue(), String.valueOf(new DataFormatter().formatCellValue(currentCell)));
                            // System.out.print(str + "\t");
                             break;
 					}

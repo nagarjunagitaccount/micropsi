@@ -14,6 +14,12 @@ public class resources {
 		return res;
 		
 	}
+	public static String getfindonebyaddressbyfull()
+	{
+		String res="/v1/profile/find_one/by_address/full";
+		return res;
+
+	}
 	public static String getcreatesession()
 	{
 		String res="/v1/session/create";

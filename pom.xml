@@ -19,10 +19,7 @@
     </build>
     <name>we-restassured</name>
     <url>http://maven.apache.org</url>
-
-
     <profiles>
-
         <profile>
             <id>PRE</id>
             <build>
@@ -115,28 +112,19 @@
             <version>6.8</version>
         </dependency>
         <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>3.0.7</version>
+            <groupId>com.vimalselvam</groupId>
+            <artifactId>cucumber-extentsreport</artifactId>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.relevantcodes</groupId>
             <artifactId>extentreports</artifactId>
-            <version>2.41.2</version>
+            <version>2.40.2</version>
         </dependency>
         <dependency>
-
             <groupId>info.cukes</groupId>
-
             <artifactId>cucumber-testng</artifactId>
-
             <version>1.2.5</version>
-
-        </dependency>
-        <dependency>
-            <groupId>com.vimalselvam</groupId>
-            <artifactId>cucumber-extentsreport</artifactId>
-            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -150,8 +138,6 @@
             <version>1.2.5</version>
             <scope>test</scope>
         </dependency>
-
-
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>

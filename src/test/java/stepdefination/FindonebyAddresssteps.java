@@ -2,13 +2,13 @@ package stepdefination;
 
 import static io.restassured.RestAssured.given;
 
+import com.api.pojo.Address;
 import com.we.api.utilities.DataHelper;
 import org.testng.Assert;
 
-import com.api.pojo.Address;
+import com.api.pojo.Addressemailphone;
 import com.api.resources.resources;
 import com.we.api.utilities.DataAccessConf;
-import com.we.api.utilities.excelreader;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.Before;
@@ -23,7 +23,7 @@ import io.restassured.specification.RequestSpecification;
 import java.util.HashMap;
 import java.util.List;
 
-public class summarysteps {
+public class FindonebyAddresssteps {
 	
 	private Response response;
 	@SuppressWarnings("unused")
@@ -32,16 +32,17 @@ public class summarysteps {
 	Scenario scenario;
 	//private excelreader data;
 	public List<HashMap<String,String>> datamap;
-	/*
+/*
 	public summarysteps()
 	{
 
-		datamap = DataHelper.data("./src/main/resources/BCC_DataSheet1.xlsx","DataSheet1");
+		datamap = DataHelper.data("./src/main/resources/We_API_TDATA.xlsx","DataSheet1");
 	}*/
 
 	@Before
-	public void beforeScenario(){
-		datamap = DataHelper.data("./src/main/resources/BCC_DataSheet1.xlsx","DataSheet1");
+	public void beforeScenario()
+	{
+		datamap = DataHelper.data("./src/main/resources/We_API_TDATA.xlsx","DataSheet1");
 	}
 
 
@@ -50,9 +51,7 @@ public class summarysteps {
 		int index = Integer.parseInt(arg1)-1;
 
 		RestAssured.baseURI=DataAccessConf.get().gethost();
-
-		Address address=new Address(datamap.get(index).get("Firstname"),datamap.get(index).get("LastName"),datamap.get(index).get("Address"),datamap.get(index).get("City"),datamap.get(index).get("State"),datamap.get(index).get("Zip"));
-
+		Address address=new Address(datamap.get(index).get("Firstname"),datamap.get(index).get("LastName"),datamap.get(index).get("Address"),"",datamap.get(index).get("City"),datamap.get(index).get("State"),datamap.get(index).get("Zip"));
 		request=given().
 				header("Content-Type","application/json").
 				header("authorization",DataAccessConf.get().getapikey()).
@@ -60,16 +59,20 @@ public class summarysteps {
 
 	}
 
-	@When("^post request to find_one basic$")
-	public void post_request_to_find_one_basic() throws Throwable {
+
+	@When("^post request to find_one address basic$")
+	public void post_request_to_find_one_address_basic() throws Throwable {
 		response = request.when().post(resources.getfindonebyaddressbybasic());
-		System.out.println("response: " + response.prettyPrint());
+	}
+	@When("^post request to find_one address full$")
+	public void post_request_to_find_one_address_full() throws Throwable {
+		response = request.when().post(resources.getfindonebyaddressbyfull());
 	}
 
 	@Then("^the status code should be matching at excel row \"([^\"]*)\"$")
 	public void the_status_code_should_be_matching_at_excel_row(String arg1) throws Throwable {
 		int index = Integer.parseInt(arg1)-1;
-		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode")));
+		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
 	}
 
 
