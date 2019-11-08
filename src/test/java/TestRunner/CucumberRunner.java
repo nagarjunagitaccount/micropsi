@@ -34,9 +34,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
                 "com.cucumber.listener.ExtentCucumberFormatter" ,
                 "html:target/cucumber-reports"},
         tags = {"~@findonebyaddressbasic"}
-
-
-
 )
 
 
