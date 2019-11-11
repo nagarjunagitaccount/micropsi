@@ -1,4 +1,4 @@
-@findonebyaddressbasic
+@addressbasic
 Feature: Findone by Address by Basic
 Get profile details by Address
 
@@ -46,7 +46,7 @@ Get profile details by Address
       |16|
       |17|
       |18|
-
+  @smoke
   Scenario Outline: Validate primary segmentation category 4
     Given customer provides find_one endpoint with valid address at excel row "<row_index>" dataset
     When  post request to find_one address basic

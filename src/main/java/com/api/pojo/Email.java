@@ -5,7 +5,7 @@ public class Email {
 	String first_name;
 	String last_name;
 	String email;
-	String client_id;
+
 
 	public String getFirst_name() {
 		return first_name;
@@ -31,19 +31,12 @@ public class Email {
 		this.email = email;
 	}
 
-	public String getClient_id() {
-		return client_id;
-	}
 
-	public void setClient_id(String client_id) {
-		this.client_id = client_id;
-	}
-
-	public Email(String first_name, String last_name, String email, String client_id) {
+	public Email(String first_name, String last_name, String email) {
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
-		this.client_id = client_id;
+
 	}
 
 

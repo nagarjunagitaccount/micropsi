@@ -1,7 +1,7 @@
-@Smoke
+@session
 Feature: Create session
   Get session key from create session endpoint
-
+  @smoke
   Scenario Outline::create session
     Given customer provides createsession endpoint with duration at excel row "<row_index>"
     When post to createsession api

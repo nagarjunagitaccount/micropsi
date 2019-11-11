@@ -33,7 +33,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
                 "testng:target/cucumber-reports/TestngCucumber.xml",
                 "com.cucumber.listener.ExtentCucumberFormatter" ,
                 "html:target/cucumber-reports"},
-        tags = {"~@findonebyaddressbasic"}
+      tags = {"@smoke"}
 )
 
 
