@@ -64,6 +64,39 @@ public class resources {
 		return res;
 
 	}
+	public static String getellucian()
+	{
+		String res="/v1/profile/find_one/ellucian/full";
+		return res;
+
+	}
+	public static String getscoreonebyaddress()
+	{
+		String res="/v1/score/score_one/by_address";
+		return res;
+
+	}
+	public static String getscoreonebyemail()
+	{
+		String res="/v1/score/score_one/by_email";
+		return res;
+
+	}
+	public static String getscoreonebyphone()
+	{
+		String res="/v1/score/score_one/by_phone";
+		return res;
+
+	}
+	public static String getscorebyprofile()
+	{
+		String res="/v1/score/profile";
+		return res;
+
+	}
+
+
+
 	
 	
 }

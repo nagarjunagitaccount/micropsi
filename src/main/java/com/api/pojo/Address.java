@@ -2,13 +2,14 @@ package com.api.pojo;
 
 public class Address {
 
-	String first_name;
-	String last_name;
-	String address_line1;
-	String address_line2;
-	String city;
-	String state;
-	String zip;
+	private String first_name;
+	private String last_name;
+	private String address_line1;
+	private String address_line2;
+	private String city;
+	private String state;
+	private String zip;
+
 
 
 	public String getFirst_name() {
@@ -78,6 +79,9 @@ public class Address {
 		this.state = state;
 		this.zip = zip;
 
+	}
+	public String toString() {
+		return "" + this.first_name + " " + this.last_name+" "+this.address_line1+""+this.address_line2+""+this.city+""+this.state+""+this.zip;
 	}
 
 
