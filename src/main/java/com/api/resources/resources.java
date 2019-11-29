@@ -94,9 +94,31 @@ public class resources {
 		return res;
 
 	}
+	public static String getfindmanybasic()
+	{
+		String res="/v1/profile/find_many/basic";
+		return res;
+
+	}
+	public static String getfindmanyfull()
+	{
+		String res="/v1/profile/find_many/full";
+		return res;
+
+	}
 
 
+	public static String getjobstatus()
+	{
+		String res="/v1/job/status/{batch_id}";
+		return res;
 
-	
-	
+	}
+
+	public static String getfindmanyresults()
+	{
+		String res="/v1/profile/find_many/results/{batch_id}";
+		return res;
+
+	}
 }
