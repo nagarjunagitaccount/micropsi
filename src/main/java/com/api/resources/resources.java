@@ -94,6 +94,12 @@ public class resources {
 		return res;
 
 	}
+	public static String getscorebyprofiles()
+	{
+		String res="/v1/score/profiles";
+		return res;
+
+	}
 	public static String getfindmanybasic()
 	{
 		String res="/v1/profile/find_many/basic";
@@ -120,5 +126,10 @@ public class resources {
 		String res="/v1/profile/find_many/results/{batch_id}";
 		return res;
 
+	}
+	public static String getscoreprofileresults()
+	{
+		String res="/v1/score/profiles/{batch_id}";
+		return res;
 	}
 }
