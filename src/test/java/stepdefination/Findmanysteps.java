@@ -66,6 +66,12 @@ public void customer_provides_Findmany_endpoint_with_profile_details_at_excel_ro
 		String responseString=response.asString();
 		batchID=response.jsonPath().getString("batchID");
 	}
+	@When("^post request to Profiles Summary$")
+	public void post_request_to_ProfilesSummary() throws Throwable {
+		response = request.when().post(resources.getprofilesbysummary());
+		String responseString=response.asString();
+		batchID=response.jsonPath().getString("batchID");
+	}
 
 	@Then("^the status code should be matching for findmany basic \"([^\"]*)\"$")
 	public void the_status_code_should_be_matching_for_findmany_basic(String arg1) throws Throwable {
@@ -135,5 +141,16 @@ public void customer_provides_Findmany_endpoint_with_profile_details_at_excel_ro
 		System.out.println(responseString);
 		Assert.assertNotNull(responseString);
 	}
+	@Then("^call Profiles summary results endpoint with batchid$")
+	public void call_Profilessummary_results_endpoint_with_batchid() throws Throwable {
+		RestAssured.baseURI = DataAccessConf.get().gethost();
 
+		response = given().pathParam("batch_id", batchID).
+				header("Content-Type", "application/json").log().uri().
+				header("authorization", DataAccessConf.get().getapikey()).
+				when().get(resources.getprofilessummaryresults());
+		String responseString = response.asString();
+		System.out.println(responseString);
+		Assert.assertNotNull(responseString);
+	}
 }

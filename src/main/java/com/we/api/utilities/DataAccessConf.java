@@ -57,6 +57,12 @@ public class DataAccessConf {
 		return cn;
     	
     }
+    public String getmegakey()
+    {
+        String cn = configProperties.getProperty("MegaKey");
+        return cn;
+
+    }
 
    
 

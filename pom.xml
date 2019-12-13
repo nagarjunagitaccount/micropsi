@@ -48,6 +48,7 @@
             <properties>
                 <host>https://api-pre.welabs.net</host>
                 <apikey>APIKey 6aec2774-e5da-4c70-af1e-f9ce76e03d3f</apikey>
+                <megakey>APIKey b406922f-4773-42aa-b393-14a3268c1a9e</megakey>
             </properties>
         </profile>
         <profile>
@@ -55,6 +56,63 @@
             <properties>
                 <host>https://api9.wealthengine.com</host>
                 <apikey>APIKey 2d855d2c-eb95-4e8d-9c86-ef2daaebcd9a</apikey>
+                <megakey>APIKey 37e6c4cd-0d38-44bf-b65e-ec95f6a10ea2</megakey>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.0</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>testngcucumber.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>QA</id>
+            <properties>
+                <host>https://api-qa.welabs.net</host>
+                <apikey>APIKey 7216cf2a-0830-4127-a800-5ec92e119b9d</apikey>
+                <megakey>APIKey 875bbe9d-cceb-4d80-9096-3345da416a12</megakey>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.0</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>testngcucumber.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>DEV</id>
+            <properties>
+                <host>https://api-dev.welabs.net</host>
+                <apikey>APIKey 32bd7250-3bfc-49a6-8c37-4f5efa5dcf49</apikey>
+                <megakey>APIKey 8db01216-d6f8-4f2e-8a2e-6f7fb4442732</megakey>
             </properties>
             <build>
                 <resources>

@@ -75,4 +75,5 @@ public class Summarysteps {
 		Assert.assertEquals(response.body().jsonPath().getJsonObject(arg2).toString() /*actual value*/, datamap.get(index).get("P2G-value") /*expected value*/, "P2G score value is matching");
 	}
 
+
 }

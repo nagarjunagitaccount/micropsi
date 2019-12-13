@@ -21,8 +21,6 @@ public class model
         this.name = name;
     }
 
-
-
     public model(String name) {
         this.name = name;
     }

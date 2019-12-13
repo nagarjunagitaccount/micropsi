@@ -27,3 +27,17 @@ Find many
     Examples:
       |startindex|endindex|
       |2|3|
+
+
+  @smoke
+  Scenario Outline: Profiles summary
+    Given customer provides Findmany endpoint with profile details at excel row "<startindex>" and "<endindex>"
+    When  post request to Profiles Summary
+    Then  the status code should be matching for findmany basic "<startindex>"
+    Then call jobstatus endpoint to check the status
+    Then call Profiles summary results endpoint with batchid
+    Then  the status code should be matching for findmany basic "<startindex>"
+
+    Examples:
+      |startindex|endindex|
+      |2|3|

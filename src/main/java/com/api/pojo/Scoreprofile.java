@@ -12,9 +12,6 @@ public class Scoreprofile extends Summary
         this.models = models;
     }
 
-
-
-
     public List<model> getModels() {
         return models;
     }

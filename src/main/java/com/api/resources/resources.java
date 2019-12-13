@@ -94,12 +94,28 @@ public class resources {
 		return res;
 
 	}
+	public static String getscorebyprofileRenamed()
+	{
+		String res="/v1/profile/score";
+		return res;
+
+	}
+
 	public static String getscorebyprofiles()
 	{
 		String res="/v1/score/profiles";
 		return res;
 
 	}
+	public static String getscorebyprofilesRenamed()
+	{
+		String res="/v1/profiles/score";
+		return res;
+
+	}
+
+
+
 	public static String getfindmanybasic()
 	{
 		String res="/v1/profile/find_many/basic";
@@ -112,6 +128,14 @@ public class resources {
 		return res;
 
 	}
+	public static String getprofilesbysummary()
+	{
+		String res="/v1/profiles/summary";
+		return res;
+
+	}
+
+
 
 
 	public static String getjobstatus()
@@ -127,9 +151,33 @@ public class resources {
 		return res;
 
 	}
+	public static String getprofilessummaryresults()
+	{
+		String res="/v1/profiles/summary/{batch_id}";
+		return res;
+
+	}
+
 	public static String getscoreprofileresults()
 	{
 		String res="/v1/score/profiles/{batch_id}";
 		return res;
 	}
+	public static String getscoreprofileresultsRenamed()
+	{
+		String res="/v1/profiles/score/{batch_id}";
+		return res;
+	}
+
+
+    public static String getmegacall()
+    {
+        String res="/v1/profile/build_many/details_mc";
+        return res;
+    }
+    public static String getmegacallresults()
+    {
+        String res=" /v1/profile/build_many/results/{batch_id}";
+        return res;
+    }
 }
