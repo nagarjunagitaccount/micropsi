@@ -153,6 +153,10 @@ public class Scoreonesteps {
     public void post_request_to_score_profile() throws Throwable {
         response = request.when().post(resources.getscorebyprofile());
     }
+    @When("^post request to profile score$")
+    public void post_request_to_profile_score() throws Throwable {
+        response = request.when().post(resources.getscorebyprofileRenamed());
+    }
 
     @Then("^the status code should be matching for scoreone \"([^\"]*)\"$")
     public void the_status_code_should_be_matching_for_scoreone(String arg1) throws Throwable {

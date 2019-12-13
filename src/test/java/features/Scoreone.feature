@@ -43,3 +43,15 @@ Feature: Scoreone
     Examples:
       |row_index|modelcount|
       |2|3|
+
+
+  @smoke
+  Scenario Outline: Validate profile score
+    Given customer provides Scoreone endpoint with summary at excel row "<row_index>" and "<modelcount>" dataset
+    When  post request to profile score
+    Then  the status code should be matching for scoreone "<row_index>"
+
+
+    Examples:
+      |row_index|modelcount|
+      |2|3|

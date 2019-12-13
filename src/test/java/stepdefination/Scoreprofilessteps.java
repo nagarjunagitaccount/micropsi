@@ -183,6 +183,11 @@ public void customer_provides_Scoreprofiles_endpoint_with_profiles_at_excel_row_
         response = request.when().post(resources.getscorebyprofiles());
         batchID=response.jsonPath().getString("batchID");
     }
+    @When("^post request to profiles score$")
+    public void post_request_to_profiles_score() throws Throwable {
+        response = request.when().post(resources.getscorebyprofilesRenamed());
+        batchID=response.jsonPath().getString("batchID");
+    }
 
     @Then("^the status code should be matching for profiles \"([^\"]*)\"$")
     public void the_status_code_should_be_matching_for_profiles(String arg1) throws Throwable {
@@ -241,6 +246,18 @@ public void customer_provides_Scoreprofiles_endpoint_with_profiles_at_excel_row_
                 header("Content-Type", "application/json").log().uri().
                 header("authorization", DataAccessConf.get().getapikey()).
                 when().get(resources.getscoreprofileresults());
+        String responseString = response.asString();
+        System.out.println(responseString);
+        Assert.assertNotNull(responseString);
+    }
+    @Then("^call profiles score results endpoint with batchid$")
+    public void call_profilesscore_results_endpoint_with_batchid() throws Throwable {
+        RestAssured.baseURI = DataAccessConf.get().gethost();
+
+        response = given().pathParam("batch_id", batchID).
+                header("Content-Type", "application/json").log().uri().
+                header("authorization", DataAccessConf.get().getapikey()).
+                when().get(resources.getscoreprofileresultsRenamed());
         String responseString = response.asString();
         System.out.println(responseString);
         Assert.assertNotNull(responseString);
