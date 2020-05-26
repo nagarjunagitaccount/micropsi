@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class elluciansteps {
     private Response response;
@@ -63,5 +64,9 @@ public void customer_provides_ellucian_endpoint_with_address_at_excel_row_datase
         ContactDetails conobject=new ContactDetails(datamap.get(index).get("Phone"),datamap.get(index).get("Email"),priobject);
         ellucian ellucianobject=new ellucian(perobject,conobject,"28e19624-181a-467d-a00f-1d09230c845e");
         return ellucianobject;
+    }
+    @Then("^validate Schema for ellucian$")
+    public void validate_Schema_for_ellucian() throws Throwable {
+        response.then().assertThat().body(matchesJsonSchemaInClasspath("ellucian.json"));
     }
 }

@@ -1,0 +1,1623 @@
+{
+  "type": "object",
+  "properties": {
+    "profiles": {
+      "description": "Results of the matching process. Each element of this array contains the input data and the matching profile, if any.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "object",
+            "properties": {
+              "environment": {
+                "type": "string",
+                "description": "Server that was called (sandbox or production)",
+                "enum": [
+                  "sandbox",
+                  "prod"
+                ]
+              },
+              "endpoint": {
+                "type": "string",
+                "description": "The endpoint that was called"
+              },
+              "output_type": {
+                "type": "string",
+                "description": "A string describing the output of this call",
+                "enum": [
+                  "profile"
+                ]
+              },
+              "query": {
+                "type": "object",
+                "description": "Data sent to WealthEngine to find a profile.",
+                "properties": {
+                  "external_id": {
+                    "type": "string",
+                    "description": "Your unique id for the individual."
+                  },
+                  "external_id2": {
+                    "type": "string",
+                    "description": "Your second unique id for the individual."
+                  },
+                  "identity": {
+                    "type": "object",
+                    "description": "Identifying information about the individual",
+                    "required": [
+                      "first_name",
+                      "last_name"
+                    ],
+                    "properties": {
+                      "first_name": {
+                        "type": "string",
+                        "description": "First name"
+                      },
+                      "middle_name": {
+                        "type": "string",
+                        "description": "Middle name"
+                      },
+                      "last_name": {
+                        "type": "string",
+                        "description": "Last / Surname"
+                      },
+                      "courtesy": {
+                        "type": "string",
+                        "description": "Mr, Mrs, Miss, Dr as examples"
+                      },
+                      "suffix": {
+                        "type": "string",
+                        "description": "Jr, 2nd, III as examples"
+                      },
+                      "age": {
+                        "type": "integer",
+                        "description": "Age as a whole integer"
+                      },
+                      "birth_date": {
+                        "type": "string",
+                        "description": "Birth date formatted as YYYYMMDD '20170720'"
+                      },
+                      "graduation_date": {
+                        "type": "string",
+                        "description": "Graduation date formatted as YYYYMMDD '20170720'"
+                      },
+                      "gender": {
+                        "type": "string",
+                        "description": "Gender",
+                        "enum": [
+                          "M",
+                          "Male",
+                          "F",
+                          "Female"
+                        ]
+                      },
+                      "emails": {
+                        "type": "array",
+                        "description": "Array of strings each representing an email address",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "phones": {
+                        "type": "array",
+                        "description": "Array of strings each representing a non-formatted phone number",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "addresses": {
+                    "type": "array",
+                    "description": "List of address objects.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "street_line1",
+                        "city",
+                        "state",
+                        "postal_code"
+                      ],
+                      "properties": {
+                        "street_line1": {
+                          "type": "string",
+                          "description": "Street address"
+                        },
+                        "street_line2": {
+                          "type": "string",
+                          "description": "Suite, Unit, Apt as examples"
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City"
+                        },
+                        "state": {
+                          "type": "string",
+                          "description": "Abbreviated state name (example: TX)"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "5 digit postal code"
+                        },
+                        "postal_code_plus_4": {
+                          "type": "string",
+                          "description": "Secondary 4 digits of the postal code"
+                        },
+                        "county": {
+                          "type": "string",
+                          "description": "County"
+                        },
+                        "country": {
+                          "type": "string",
+                          "description": "Country name."
+                        },
+                        "primary_flag": {
+                          "type": "boolean",
+                          "description": "True if primary address"
+                        }
+                      }
+                    }
+                  },
+                  "transactions": {
+                    "type": "object",
+                    "description": "List of transactions",
+                    "properties": {
+                      "first_transaction_amount": {
+                        "type": "integer",
+                        "description": "integer representing the first transaction amount"
+                      },
+                      "first_transaction_date": {
+                        "type": "string",
+                        "description": "first transaction date formatted as YYYYMMDD '20170720'"
+                      },
+                      "largest_transaction_amount": {
+                        "type": "integer",
+                        "description": "integer representing the largest transaction amount"
+                      },
+                      "largest_transaction_date": {
+                        "type": "string",
+                        "description": "largest transaction date formatted as YYYYMMDD '20170720'"
+                      },
+                      "last_transaction_amount": {
+                        "type": "integer",
+                        "description": "integer representing the most recent transaction amount"
+                      },
+                      "last_transaction_date": {
+                        "type": "integer",
+                        "description": "most recent transaction date formatted as YYYYMMDD '20170720'"
+                      },
+                      "total_number_transactions": {
+                        "type": "integer",
+                        "description": "integer for total number of transactions"
+                      },
+                      "total_years_transactions": {
+                        "type": "integer",
+                        "description": "total number of years transacting with your organization"
+                      }
+                    }
+                  },
+                  "spouse": {
+                    "type": "object",
+                    "description": "Identifying information about the spouse.",
+                    "properties": {
+                      "identity": {
+                        "type": "object",
+                        "description": "Identifying information about the individual",
+                        "required": [
+                          "first_name",
+                          "last_name"
+                        ],
+                        "properties": {
+                          "first_name": {
+                            "type": "string",
+                            "description": "First name"
+                          },
+                          "middle_name": {
+                            "type": "string",
+                            "description": "Middle name"
+                          },
+                          "last_name": {
+                            "type": "string",
+                            "description": "Last / Surname"
+                          },
+                          "courtesy": {
+                            "type": "string",
+                            "description": "Mr, Mrs, Miss, Dr as examples"
+                          },
+                          "suffix": {
+                            "type": "string",
+                            "description": "Jr, 2nd, III as examples"
+                          },
+                          "age": {
+                            "type": "integer",
+                            "description": "Age as a whole integer"
+                          },
+                          "birth_date": {
+                            "type": "string",
+                            "description": "Birth date formatted as YYYYMMDD '20170720'"
+                          },
+                          "graduation_date": {
+                            "type": "string",
+                            "description": "Graduation date formatted as YYYYMMDD '20170720'"
+                          },
+                          "gender": {
+                            "type": "string",
+                            "description": "Gender",
+                            "enum": [
+                              "M",
+                              "Male",
+                              "F",
+                              "Female"
+                            ]
+                          },
+                          "emails": {
+                            "type": "array",
+                            "description": "Array of strings each representing an email address",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "phones": {
+                            "type": "array",
+                            "description": "Array of strings each representing a non-formatted phone number",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "addresses": {
+                        "description": "Spouse's array of address objects.",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "street_line1",
+                            "city",
+                            "state",
+                            "postal_code"
+                          ],
+                          "properties": {
+                            "street_line1": {
+                              "type": "string",
+                              "description": "Street address"
+                            },
+                            "street_line2": {
+                              "type": "string",
+                              "description": "Suite, Unit, Apt as examples"
+                            },
+                            "city": {
+                              "type": "string",
+                              "description": "City"
+                            },
+                            "state": {
+                              "type": "string",
+                              "description": "Abbreviated state name (example: TX)"
+                            },
+                            "postal_code": {
+                              "type": "string",
+                              "description": "5 digit postal code"
+                            },
+                            "postal_code_plus_4": {
+                              "type": "string",
+                              "description": "Secondary 4 digits of the postal code"
+                            },
+                            "county": {
+                              "type": "string",
+                              "description": "County"
+                            },
+                            "country": {
+                              "type": "string",
+                              "description": "Country name."
+                            },
+                            "primary_flag": {
+                              "type": "boolean",
+                              "description": "True if primary address"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "custom_attributes": {
+                    "type": "object",
+                    "description": "object of key value pairs representing custom attributes. Limit to 50.",
+                    "properties": {
+                      "attr1": {
+                        "type": "string",
+                        "description": "Representative key value pair for a custom attribute."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "profile": {
+            "description": "Details on the person. This will be an empty structure if there is no match to the input.",
+            "type": "object",
+            "properties": {
+              "profile_id": {
+                "type": "number",
+                "description": "Unique WealthEngine profile id."
+              },
+              "external_id": {
+                "type": "number",
+                "description": "Your unique id for the individual, copied from query."
+              },
+              "external_id2": {
+                "type": "number",
+                "description": "Your second unique id for the individual, copied from query."
+              },
+              "custom_attributes": {
+                "type": "object",
+                "description": "Object containing key value paris of custom attributes that were sent as part of the request.",
+                "properties": {
+                  "attr1": {
+                    "type": "string",
+                    "description": "Representative key/value pair."
+                  }
+                }
+              },
+              "identity": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "description": "First name"
+                  },
+                  "middle_name": {
+                    "type": "string",
+                    "description": "Middle name"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "description": "Last / Surname"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "description": "First, Middle, Last and Suffix combined into one single string"
+                  },
+                  "courtesy": {
+                    "type": "string",
+                    "description": "Mr, Mrs, Miss, Dr as examples"
+                  },
+                  "suffix": {
+                    "type": "string",
+                    "description": "Jr, 2nd, III as examples"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "description": "Age as a whole integer"
+                  },
+                  "graduation_date": {
+                    "type": "string",
+                    "description": "Graduation date formatted as YYYYMMDD '20170720'"
+                  },
+                  "gender": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "Gender as text, 'Male' or 'Female' as examples",
+                        "enum": [
+                          "Male",
+                          "Female",
+                          "Unknown"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Gender as an abbreviation, 'M' or 'F' as examples",
+                        "enum": [
+                          "M",
+                          "F"
+                        ]
+                      }
+                    }
+                  },
+                  "marital_status": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "string representation of status",
+                        "enum": [
+                          "Maybe Married",
+                          "Maybe Single",
+                          "Married",
+                          "Single",
+                          "Unknown"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "value representation of status, single character",
+                        "enum": [
+                          "A",
+                          "B",
+                          "M",
+                          "S"
+                        ]
+                      }
+                    }
+                  },
+                  "emails": {
+                    "type": "array",
+                    "description": "Array of email addresses and types",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "description": "Email address"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Email type",
+                          "enum": [
+                            "B",
+                            "P"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "phones": {
+                    "type": "array",
+                    "description": "Array of phone numbers and types.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "phone": {
+                          "type": "string",
+                          "description": "Phone number"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Phone number type",
+                          "enum": [
+                            "B",
+                            "P"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "realestate": {
+                "type": "array",
+                "description": "Information about physical properties owned by a person.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source",
+                      "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                      ]
+                    },
+                    "owners": {
+                      "type": "array",
+                      "description": "Array of objects about the owner(s) of the property.",
+                      "items": {
+                        "type": "object",
+                        "description": "This object is used multiple times in the details object.",
+                        "properties": {
+                          "first_name": {
+                            "type": "string",
+                            "description": "First name."
+                          },
+                          "middle_name": {
+                            "type": "string",
+                            "description": "Middle name."
+                          },
+                          "last_name": {
+                            "type": "string",
+                            "description": "Last name."
+                          },
+                          "suffix": {
+                            "type": "string",
+                            "description": "Jr, 2nd, III as examples."
+                          },
+                          "full_name": {
+                            "type": "string",
+                            "description": "First, Middle, Last and Suffix combined into one single string."
+                          }
+                        }
+                      }
+                    },
+                    "property_address": {
+                      "type": "object",
+                      "properties": {
+                        "street_line1": {
+                          "type": "string",
+                          "description": "Street address."
+                        },
+                        "street_line2": {
+                          "type": "string",
+                          "description": "Suite/Apartment."
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City"
+                        },
+                        "state": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "full state name (example: Texas)"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "2 letter state code (example: TX)"
+                            }
+                          }
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "5 digit zip code"
+                        }
+                      }
+                    },
+                    "property_valuation": {
+                      "type": "number",
+                      "description": "Float representing the value of the property in dollars"
+                    },
+                    "sales_price": {
+                      "type": "number",
+                      "description": "Float representing the sales price of the property in dollars"
+                    },
+                    "mailing_address": {
+                      "type": "object",
+                      "properties": {
+                        "street_line1": {
+                          "type": "string",
+                          "description": "Street address."
+                        },
+                        "street_line2": {
+                          "type": "string",
+                          "description": "Suite/Apartment."
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City"
+                        },
+                        "state": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "full state name (example: Texas)"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "2 letter state code (example: TX)"
+                            }
+                          }
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "5 digit zip code"
+                        }
+                      }
+                    },
+                    "lot_number": {
+                      "type": "string",
+                      "description": "Lot number"
+                    },
+                    "parcel_number_primary": {
+                      "type": "string",
+                      "description": "Primary parcel number"
+                    },
+                    "legal_description": {
+                      "type": "string",
+                      "description": "Legal description."
+                    },
+                    "buyer": {
+                      "type": "string",
+                      "description": "Buyer's name"
+                    },
+                    "county": {
+                      "type": "string",
+                      "description": "County"
+                    },
+                    "loan_amount": {
+                      "type": "number",
+                      "description": "Loan amount"
+                    },
+                    "total_assessed_value": {
+                      "type": "number",
+                      "description": "Total assessed value"
+                    },
+                    "assessed_year": {
+                      "type": "string",
+                      "description": "The year the property was assessed"
+                    },
+                    "date_of_transfer": {
+                      "type": "integer",
+                      "description": "Transfer date formatted as YYYYMMDD '20170720'"
+                    },
+                    "historic": {
+                      "type": "boolean",
+                      "description": "True or false flag on whether this property is historical"
+                    },
+                    "as_of_date": {
+                      "type": "integer",
+                      "description": "Information is valid as of this date, formatted as YYYYMMDD '20170720'"
+                    }
+                  }
+                }
+              },
+              "real_estate_scores": {
+                "type": "object",
+                "properties": {
+                  "total_num_properties": {
+                    "type": "integer",
+                    "description": "Number of properties owned by this profile"
+                  },
+                  "total_real_estate_value": {
+                    "type": "object",
+                    "description": "Bracketed sum of worth in dollars of this profile's owned property",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of realestate.total_realestate_value.text",
+                        "enum": [
+                          "$1-$250K"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of realestate.total_realestate_value.text",
+                        "enum": [
+                          "$10MM+"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's realestate.total_realestate_value.value bracket",
+                        "enum": [
+                          "Unable to rate",
+                          "$1-$250K",
+                          "$250K-$500K",
+                          "$500K-$750K",
+                          "$750K-$1MM",
+                          "$1MM-$2MM",
+                          "$2MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM+"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible real estate bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible real estate bracket value (always 8)",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "Value of this profile's real estate ownership bracket",
+                        "minimum": 0,
+                        "maximum": 8
+                      }
+                    }
+                  }
+                }
+              },
+              "giving": {
+                "type": "object",
+                "description": "Charitable information about a person",
+                "properties": {
+                  "estimated_annual_donations": {
+                    "type": "object",
+                    "description": "Amount a person is likely to give in 1 year, in dollars",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of giving.estimated_annual_donations.text",
+                        "enum": [
+                          "<$1K"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of giving.estimated_annual_donations.text",
+                        "enum": [
+                          "$100K+"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's giving.estimated_annual_donations.value bracket",
+                        "enum": [
+                          "Unable to rate",
+                          "<$1K",
+                          "$1K-$5K",
+                          "$5K-$10K",
+                          "$10K-$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K+"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible estimated annual donations bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible estimated annual donations bracket value (always 7)",
+                        "enum": [
+                          7
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "Value of this profile's estimated annual bracket",
+                        "minimum": 0,
+                        "maximum": 7
+                      }
+                    }
+                  },
+                  "gift_capacity": {
+                    "type": "object",
+                    "description": "What a person could possibly give over 5 years",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of giving.gift_capacity.text",
+                        "enum": [
+                          "<$1K"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of giving.gift_capacity.text",
+                        "enum": [
+                          "$5MM+"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's giving.gift_capacity.value bracket",
+                        "enum": [
+                          "Unable to rate",
+                          "<$1K",
+                          "$1K-$2K",
+                          "$2K-$3K",
+                          "$3K-$5K",
+                          "$5K-$7.5K",
+                          "$7.5K-$10K",
+                          "$10K-$15K",
+                          "$15K-$20K",
+                          "$20K-$25k",
+                          "$25K-$30K",
+                          "$30K-$40K",
+                          "$40K-$50K",
+                          "$50K-$75K",
+                          "$75K-$100K",
+                          "$100K-$200K",
+                          "$200K-$300K",
+                          "$300K-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM+"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible gift capacity bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible gift capacity bracket value (always 20)",
+                        "enum": [
+                          20
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "Value of this profile's gift capacity bracket",
+                        "minimum": 0,
+                        "maximum": 20
+                      }
+                    }
+                  },
+                  "p2g_score": {
+                    "type": "object",
+                    "description": "This profile's propensity to give",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "Text describing this profile's P2G score"
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "Value of this profile's propensity to give score"
+                      }
+                    }
+                  }
+                }
+              },
+              "philanthrophic_gifts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source"
+                    },
+                    "name": {
+                      "type": "object",
+                      "description": "This object is used multiple times in the details object.",
+                      "properties": {
+                        "first_name": {
+                          "type": "string",
+                          "description": "First name."
+                        },
+                        "middle_name": {
+                          "type": "string",
+                          "description": "Middle name."
+                        },
+                        "last_name": {
+                          "type": "string",
+                          "description": "Last name."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Jr, 2nd, III as examples."
+                        },
+                        "full_name": {
+                          "type": "string",
+                          "description": "First, Middle, Last and Suffix combined into one single string."
+                        }
+                      }
+                    },
+                    "range_low": {
+                      "type": "number",
+                      "description": "Lower bounds of the gift amount"
+                    },
+                    "range_high": {
+                      "type": "number",
+                      "description": "Upper bounds of the gift amount"
+                    },
+                    "organization": {
+                      "type": "string",
+                      "description": "Name of the organization the gift was made to"
+                    },
+                    "gift_year": {
+                      "type": "string",
+                      "description": "Year the gift was made"
+                    },
+                    "gift_type": {
+                      "type": "string",
+                      "description": "type of gift",
+                      "enum": [
+                        "ANNUITY",
+                        "BEQUEST",
+                        "CONSECUTIVE",
+                        "CUMULATIVE",
+                        "ENDOWMENT",
+                        "IN-KIND",
+                        "LIFE INSURANCE",
+                        "MATCHING GIFT",
+                        "MEMBERSHIP",
+                        "MONETARY",
+                        "OTHERS",
+                        "PARTNERSHIP",
+                        "PLANNED GIFT",
+                        "SERVICES",
+                        "SPONSOR",
+                        "VOLUNTEER"
+                      ]
+                    },
+                    "organization_location": {
+                      "type": "object",
+                      "properties": {
+                        "city": {
+                          "type": "string",
+                          "description": "City"
+                        },
+                        "state": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "Full state name (example: Texas)"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "2 letter state code (example: TX)"
+                            }
+                          }
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "5 digit zip code"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "positions": {
+                "type": "array",
+                "description": "Array of business info",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source",
+                      "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                      ]
+                    },
+                    "name": {
+                      "type": "object",
+                      "description": "This object is used multiple times in the details object.",
+                      "properties": {
+                        "first_name": {
+                          "type": "string",
+                          "description": "First name."
+                        },
+                        "middle_name": {
+                          "type": "string",
+                          "description": "Middle name."
+                        },
+                        "last_name": {
+                          "type": "string",
+                          "description": "Last name."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Jr, 2nd, III as examples."
+                        },
+                        "full_name": {
+                          "type": "string",
+                          "description": "First, Middle, Last and Suffix combined into one single string."
+                        }
+                      }
+                    },
+                    "business_name": {
+                      "type": "string",
+                      "description": "Business name"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Job title associated with this job"
+                    },
+                    "bio": {
+                      "type": "string",
+                      "description": "Biographical information"
+                    },
+                    "source": {
+                      "type": "string",
+                      "description": "Source of information"
+                    },
+                    "historic": {
+                      "type": "boolean",
+                      "description": "True if this position is historical"
+                    },
+                    "as_of_date": {
+                      "type": "integer",
+                      "description": "Information is valid as of this date, formatted as YYYYMMDD '20170720'"
+                    },
+                    "income": {
+                      "type": "number",
+                      "description": "Income as a float"
+                    },
+                    "salary": {
+                      "type": "number",
+                      "description": "Salary as a float (may differ from income)"
+                    }
+                  }
+                }
+              },
+              "securities": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source",
+                      "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                      ]
+                    },
+                    "issuer_name": {
+                      "type": "string",
+                      "description": "Name of issuing party"
+                    },
+                    "direct_value": {
+                      "type": "number",
+                      "description": "Direct value"
+                    },
+                    "indirect_value": {
+                      "type": "number",
+                      "description": "Indirect value"
+                    },
+                    "total_value": {
+                      "type": "number",
+                      "description": "Total value"
+                    },
+                    "name": {
+                      "type": "object",
+                      "description": "This object is used multiple times in the details object.",
+                      "properties": {
+                        "first_name": {
+                          "type": "string",
+                          "description": "First name."
+                        },
+                        "middle_name": {
+                          "type": "string",
+                          "description": "Middle name."
+                        },
+                        "last_name": {
+                          "type": "string",
+                          "description": "Last name."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Jr, 2nd, III as examples."
+                        },
+                        "full_name": {
+                          "type": "string",
+                          "description": "First, Middle, Last and Suffix combined into one single string."
+                        }
+                      }
+                    },
+                    "relationship": {
+                      "type": "string",
+                      "description": "Relationship to the security (ex. Owner)"
+                    },
+                    "last_transaction_date": {
+                      "type": "integer",
+                      "description": "the last transaction date, formatted as YYYYMMDD '20170720'"
+                    },
+                    "quantity_held": {
+                      "type": "number",
+                      "description": "Quantity held"
+                    }
+                  }
+                }
+              },
+              "wealth": {
+                "type": "object",
+                "properties": {
+                  "accredited_investor": {
+                    "type": "boolean",
+                    "description": "True if the individual is an accredited investor"
+                  },
+                  "networth": {
+                    "type": "object",
+                    "description": "Total household net worth bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of wealth.networth.text",
+                        "enum": [
+                          "<$25K"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of wealth.networth.text",
+                        "enum": [
+                          "$500MM+"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's wealth.networth.value bracket",
+                        "enum": [
+                          "Unable to rate",
+                          "<$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM-$500MM",
+                          "$500MM+"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible net worth bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible net worth bracket value (always 12)",
+                        "enum": [
+                          12
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "This profile's net worth bracket",
+                        "minimum": 0,
+                        "maximum": 12
+                      }
+                    }
+                  },
+                  "total_income": {
+                    "type": "object",
+                    "description": "Total income of household",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of wealth.total_income.text",
+                        "enum": [
+                          "$1-$50K"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of wealth.total_income.text",
+                        "enum": [
+                          "$500K+"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's wealth.total_income.value bracket",
+                        "enum": [
+                          "Unable to rate",
+                          "$1-$50K",
+                          "$50K-$100K",
+                          "$100K-$250K",
+                          "$250K-$500K",
+                          "$500K+"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible total income bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible total income bracket value (always 5)",
+                        "enum": [
+                          5
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "This profile's total income bracket ",
+                        "minimum": 0,
+                        "maximum": 5
+                      }
+                    }
+                  }
+                }
+              },
+              "biographical": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Biographical information",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source",
+                      "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                      ]
+                    },
+                    "name": {
+                      "type": "object",
+                      "description": "This object is used multiple times in the details object.",
+                      "properties": {
+                        "first_name": {
+                          "type": "string",
+                          "description": "First name."
+                        },
+                        "middle_name": {
+                          "type": "string",
+                          "description": "Middle name."
+                        },
+                        "last_name": {
+                          "type": "string",
+                          "description": "Last name."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Jr, 2nd, III as examples."
+                        },
+                        "full_name": {
+                          "type": "string",
+                          "description": "First, Middle, Last and Suffix combined into one single string."
+                        }
+                      }
+                    },
+                    "birthdate": {
+                      "type": "integer",
+                      "description": "birthdate formatted as YYYYMMDD '20170720'"
+                    },
+                    "birthplace": {
+                      "type": "string",
+                      "description": "Birth place"
+                    },
+                    "business_address": {
+                      "type": "object",
+                      "properties": {
+                        "street_line1": {
+                          "type": "string",
+                          "description": "Street address."
+                        },
+                        "street_line2": {
+                          "type": "string",
+                          "description": "Suite/Apartment."
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City"
+                        },
+                        "state": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "full state name (example: Texas)"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "2 letter state code (example: TX)"
+                            }
+                          }
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "5 digit zip code"
+                        }
+                      }
+                    },
+                    "education": {
+                      "type": "string",
+                      "description": "Education details"
+                    },
+                    "personal": {
+                      "type": "string",
+                      "description": "Personal information"
+                    },
+                    "family": {
+                      "type": "string",
+                      "description": "Family details"
+                    },
+                    "civic_military_service": {
+                      "type": "string",
+                      "description": "Civic military service details"
+                    },
+                    "career": {
+                      "type": "string",
+                      "description": "Career details"
+                    },
+                    "occupation": {
+                      "type": "string",
+                      "description": "Occupational details"
+                    },
+                    "positions_held": {
+                      "type": "string",
+                      "description": "Positions held"
+                    },
+                    "source": {
+                      "type": "string",
+                      "description": "Source of biograpical information"
+                    },
+                    "historic": {
+                      "type": "boolean",
+                      "description": "True if this biographical information is historical."
+                    },
+                    "as_of_date": {
+                      "type": "integer",
+                      "description": "Information is valid as of this date, formatted as YYYYMMDD '20170720'"
+                    }
+                  }
+                }
+              },
+              "nonprofit_affiliations": {
+                "type": "array",
+                "description": "nonprofit affiliations",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source",
+                      "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                      ]
+                    },
+                    "name": {
+                      "type": "object",
+                      "description": "This object is used multiple times in the details object.",
+                      "properties": {
+                        "first_name": {
+                          "type": "string",
+                          "description": "First name."
+                        },
+                        "middle_name": {
+                          "type": "string",
+                          "description": "Middle name."
+                        },
+                        "last_name": {
+                          "type": "string",
+                          "description": "Last name."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Jr, 2nd, III as examples."
+                        },
+                        "full_name": {
+                          "type": "string",
+                          "description": "First, Middle, Last and Suffix combined into one single string."
+                        }
+                      }
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Position held at the nonprofit"
+                    },
+                    "organization": {
+                      "type": "string",
+                      "description": "Organization name"
+                    },
+                    "individual_form_year": {
+                      "type": "string",
+                      "description": "Individual form year"
+                    },
+                    "individual_city": {
+                      "type": "string",
+                      "description": "Individual year"
+                    },
+                    "individual_state": {
+                      "type": "string",
+                      "description": "Individual state"
+                    },
+                    "total_assets_eoy": {
+                      "type": "integer",
+                      "description": "Total assets at the end of the year"
+                    },
+                    "org_form_year": {
+                      "type": "string",
+                      "description": "Organization form year"
+                    },
+                    "ein": {
+                      "type": "string",
+                      "description": "EIN"
+                    }
+                  }
+                }
+              },
+              "political_donations": {
+                "type": "array",
+                "description": "Political donations",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source",
+                      "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                      ]
+                    },
+                    "name": {
+                      "type": "object",
+                      "description": "This object is used multiple times in the details object.",
+                      "properties": {
+                        "first_name": {
+                          "type": "string",
+                          "description": "First name."
+                        },
+                        "middle_name": {
+                          "type": "string",
+                          "description": "Middle name."
+                        },
+                        "last_name": {
+                          "type": "string",
+                          "description": "Last name."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Jr, 2nd, III as examples."
+                        },
+                        "full_name": {
+                          "type": "string",
+                          "description": "First, Middle, Last and Suffix combined into one single string."
+                        }
+                      }
+                    },
+                    "recipient": {
+                      "type": "string",
+                      "description": "Recipient of the donation"
+                    },
+                    "donations_date": {
+                      "type": "integer",
+                      "description": "Donation date formatted as YYYYMMDD '20170720'"
+                    },
+                    "recipient_state": {
+                      "type": "string",
+                      "description": "Recipient state"
+                    },
+                    "source": {
+                      "type": "string",
+                      "description": "Source of this information"
+                    },
+                    "occupation": {
+                      "type": "string",
+                      "description": "Occupation"
+                    },
+                    "donor_city": {
+                      "type": "string",
+                      "description": "City"
+                    },
+                    "donor_state": {
+                      "type": "string",
+                      "description": "State"
+                    },
+                    "donor_zip": {
+                      "type": "string",
+                      "description": "5 digit ZIP code"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "description": "Amount of the donation in dollars"
+                    }
+                  }
+                }
+              },
+              "foundation_affiliations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quality_of_match": {
+                      "type": "string",
+                      "description": "A confidence guage for the data source",
+                      "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                      ]
+                    },
+                    "name": {
+                      "type": "object",
+                      "description": "This object is used multiple times in the details object.",
+                      "properties": {
+                        "first_name": {
+                          "type": "string",
+                          "description": "First name."
+                        },
+                        "middle_name": {
+                          "type": "string",
+                          "description": "Middle name."
+                        },
+                        "last_name": {
+                          "type": "string",
+                          "description": "Last name."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Jr, 2nd, III as examples."
+                        },
+                        "full_name": {
+                          "type": "string",
+                          "description": "First, Middle, Last and Suffix combined into one single string."
+                        }
+                      }
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Position held at foundation"
+                    },
+                    "organization": {
+                      "type": "string",
+                      "description": "Organization name"
+                    },
+                    "individual_form_year": {
+                      "type": "string",
+                      "description": "Individual form year"
+                    },
+                    "fir_market_value_assets": {
+                      "type": "integer",
+                      "description": "Float representing the fir market value assets"
+                    },
+                    "org_form_year": {
+                      "type": "string",
+                      "description": "Organization form year"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

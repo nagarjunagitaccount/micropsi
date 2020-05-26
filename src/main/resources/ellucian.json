@@ -1,0 +1,849 @@
+{
+  "type": "object",
+  "properties": {
+    "recordId": {
+      "type": "integer",
+      "description": "WealthEngine record ID"
+    },
+    "requestId": {
+      "type": "string",
+      "description": "The value of the `id` from the request."
+    },
+    "metrics": {
+      "type": "object",
+      "description": "All of the ratings and scores we have for this profile.",
+      "properties": {
+        "annuityRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "0",
+            "1",
+            "2"
+          ]
+        },
+        "trustRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "0",
+            "1",
+            "2"
+          ]
+        },
+        "companyValueRating": {
+          "type": "string",
+          "description": "Value rating of the company. Corresponds to table ordering for companyValueRange",
+          "enum": [
+            "null",
+            "WE.COVALU.1",
+            "WE.COVALU.2",
+            "WE.COVALU.3",
+            "WE.COVALU.4",
+            "WE.COVALU.5",
+            "WE.COVALU.6",
+            "WE.COVALU.7",
+            "WE.COVALU.8",
+            "WE.COVALU.999"
+          ]
+        },
+        "companyValueRange": {
+          "type": "string",
+          "description": "Valuation of the company",
+          "enum": [
+            "null",
+            "$1-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM-$25MM",
+            "$25MM-$50MM",
+            "$50MM-$100MM",
+            "$100MM+",
+            "Unable to rate"
+          ]
+        },
+        "givingCapacityStocksRating": {
+          "type": "string",
+          "description": "Rating for stock giving capacity. Corresponds to order of list in givingCapacityStocksRange",
+          "enum": [
+            "null",
+            "WE.GCSTOK.1",
+            "WE.GCSTOK.2",
+            "WE.GCSTOK.3",
+            "WE.GCSTOK.4",
+            "WE.GCSTOK.5",
+            "WE.GCSTOK.6",
+            "WE.GCSTOK.7",
+            "WE.GCSTOK.8",
+            "WE.GCSTOK.999"
+          ]
+        },
+        "givingCapacityStocksRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM-$25MM",
+            "$25MM-$50MM",
+            "$50MM-$100MM",
+            "$100MM+",
+            "Unable to rate"
+          ]
+        },
+        "realEstateValueRating": {
+          "type": "string",
+          "description": "Value of real estate. Corresponds to table in realEstateValueRange",
+          "enum": [
+            "null",
+            "WE.RELEST.1",
+            "WE.RELEST.2",
+            "WE.RELEST.3",
+            "WE.RELEST.4",
+            "WE.RELEST.5",
+            "WE.RELEST.6",
+            "WE.RELEST.7",
+            "WE.RELEST.8",
+            "WE.RELEST.999"
+          ]
+        },
+        "realEstateValueRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$250K",
+            "$250K-$500K",
+            "$500K-$750K",
+            "$750K-$1MM",
+            "$1MM-$2MM",
+            "$2MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM+",
+            "Unable to rate"
+          ]
+        },
+        "incomeRating": {
+          "type": "string",
+          "description": "Total income rating. Corresponds to table in incomeRange",
+          "enum": [
+            "null",
+            "WE.INCOME.1",
+            "WE.INCOME.2",
+            "WE.INCOME.3",
+            "WE.INCOME.4",
+            "WE.INCOME.5",
+            "WE.INCOME.999"
+          ]
+        },
+        "incomeRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$50K",
+            "$50K-$100K",
+            "$100K-$250K",
+            "$250K-$500K",
+            "$500K+",
+            "Unable to rate"
+          ]
+        },
+        "directStockRating": {
+          "type": "string",
+          "description": "Stock ownership rating. Corresponds to table in directStockRange",
+          "enum": [
+            "null",
+            "WE.DSTOCK.1",
+            "WE.DSTOCK.2",
+            "WE.DSTOCK.3",
+            "WE.DSTOCK.4",
+            "WE.DSTOCK.5",
+            "WE.DSTOCK.6",
+            "WE.DSTOCK.7",
+            "WE.DSTOCK.8",
+            "WE.DSTOCK.999"
+          ]
+        },
+        "directStockRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM-$25MM",
+            "$25MM-$50MM",
+            "$50MM-$100MM",
+            "$100MM+",
+            "Unable to rate"
+          ]
+        },
+        "liquidityRating": {
+          "type": "string",
+          "description": "Cash on hand",
+          "enum": [
+            "null",
+            "WE.LIQUID.1",
+            "WE.LIQUID.2",
+            "WE.LIQUID.3",
+            "WE.LIQUID.4",
+            "WE.LIQUID.999"
+          ]
+        },
+        "liquidityRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "<$10K",
+            "$10K-$100K",
+            "$100K-$500K",
+            "$500K+",
+            "Unable to rate"
+          ]
+        },
+        "givingCapacityRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.GIVCAP.1",
+            "WE.GIVCAP.2",
+            "WE.GIVCAP.3",
+            "WE.GIVCAP.4",
+            "WE.GIVCAP.5",
+            "WE.GIVCAP.6",
+            "WE.GIVCAP.7",
+            "WE.GIVCAP.8",
+            "WE.GIVCAP.9",
+            "WE.GIVCAP.10",
+            "WE.GIVCAP.11",
+            "WE.GIVCAP.12",
+            "WE.GIVCAP.13",
+            "WE.GIVCAP.14",
+            "WE.GIVCAP.15",
+            "WE.GIVCAP.16",
+            "WE.GIVCAP.17",
+            "WE.GIVCAP.18",
+            "WE.GIVCAP.19",
+            "WE.GIVCAP.20",
+            "WE.GIVCAP.999"
+          ]
+        },
+        "givingCapacityRange": {
+          "type": "string",
+          "description": "Estimated giving capacity.",
+          "enum": [
+            "null",
+            "<$1K",
+            "$1K-$2K",
+            "$2K-$3K",
+            "$3K-$5K",
+            "$5K-$7.5K",
+            "$7.5K-$10K",
+            "$10K-$15K",
+            "$15K-$20K",
+            "$20K-$25K",
+            "$25K-$30K",
+            "$30K-$40K",
+            "$40K-$50K",
+            "$50K-$75K",
+            "$75K-$100K",
+            "$100K-$200K",
+            "$200K-$300K",
+            "$300K-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM+",
+            "Unable to rate"
+          ]
+        },
+        "assetRating": {
+          "type": "string",
+          "description": "Total assets",
+          "enum": [
+            "null",
+            "WE.ASSETS.1",
+            "WE.ASSETS.2",
+            "WE.ASSETS.3",
+            "WE.ASSETS.4",
+            "WE.ASSETS.5",
+            "WE.ASSETS.6",
+            "WE.ASSETS.7",
+            "WE.ASSETS.8",
+            "WE.ASSETS.9",
+            "WE.ASSETS.10",
+            "WE.ASSETS.11",
+            "WE.ASSETS.12",
+            "WE.ASSETS.999"
+          ]
+        },
+        "assetRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "<$25K",
+            "$25K-$50K",
+            "$50K-$100K",
+            "$100K-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM-$25MM",
+            "$25MM-$50MM",
+            "$50MM-$100MM",
+            "$100MM-$500MM",
+            "$500MM+",
+            "Unable to rate"
+          ]
+        },
+        "inclinationGiving": {
+          "type": "string",
+          "description": "Inclination to give",
+          "enum": [
+            "null",
+            "Giving data not provided",
+            "Prospect",
+            "Small Dated Gift",
+            "Moderate Dated Gift(s)",
+            "Small Recent Gift: One Time Giver",
+            "Small Recent Gift: Frequent Giver",
+            "Large Dated Gift",
+            "Moderate Recent Gift: One Time Giver",
+            "Moderate Recent Gift: Frequent Giver",
+            "Large Recent Gift",
+            "Unable to rate"
+          ]
+        },
+        "assetOwnership": {
+          "description": "Boat or aircraft owner",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "boat",
+              "aircraft"
+            ]
+          }
+        },
+        "givingCapacityIncomeRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.GC-INC.1",
+            "WE.GC-INC.2",
+            "WE.GC-INC.3",
+            "WE.GC-INC.4",
+            "WE.GC-INC.5",
+            "WE.GC-INC.6",
+            "WE.GC-INC.7",
+            "WE.GC-INC.8",
+            "WE.GC-INC.9",
+            "WE.GC-INC.10",
+            "WE.GC-INC.11",
+            "WE.GC-INC.999"
+          ]
+        },
+        "givingCapacityIncomeRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "<$5K",
+            "$5K-$10K",
+            "$10K-$15K",
+            "$15K-$20K",
+            "$20K-$25K",
+            "$25K-$30K",
+            "$30K-$35K",
+            "$35K-$40K",
+            "$40K-$45K",
+            "$45K-$50K",
+            "$50K+",
+            "Unable to rate"
+          ]
+        },
+        "netWorthRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.NETWRTH.1",
+            "WE.NETWRTH.2",
+            "WE.NETWRTH.3",
+            "WE.NETWRTH.4",
+            "WE.NETWRTH.5",
+            "WE.NETWRTH.6",
+            "WE.NETWRTH.7",
+            "WE.NETWRTH.8",
+            "WE.NETWRTH.9",
+            "WE.NETWRTH.10",
+            "WE.NETWRTH.11",
+            "WE.NETWRTH.12",
+            "WE.NETWRTH.999"
+          ]
+        },
+        "netWorthRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "<$25K",
+            "$25K-$50K",
+            "$50K-$100K",
+            "$100K-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM-$25MM",
+            "$25MM-$50MM",
+            "$50MM-$100MM",
+            "$100MM-$500MM",
+            "$500MM+",
+            "Unable to rate"
+          ]
+        },
+        "totalStockRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.TSTOCK.1",
+            "WE.TSTOCK.2",
+            "WE.TSTOCK.3",
+            "WE.TSTOCK.4",
+            "WE.TSTOCK.5",
+            "WE.TSTOCK.6",
+            "WE.TSTOCK.7",
+            "WE.TSTOCK.8",
+            "WE.TSTOCK.999"
+          ]
+        },
+        "totalStockRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM-$25MM",
+            "$25MM-$50MM",
+            "$50MM-$100MM",
+            "$100MM+",
+            "Unable to rate"
+          ]
+        },
+        "givingCapacityRealEstateRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.GCREAL.1",
+            "WE.GCREAL.2",
+            "WE.GCREAL.3",
+            "WE.GCREAL.4",
+            "WE.GCREAL.5",
+            "WE.GCREAL.6",
+            "WE.GCREAL.7",
+            "WE.GCREAL.8",
+            "WE.GCREAL.9",
+            "WE.GCREAL.10",
+            "WE.GCREAL.11",
+            "WE.GCREAL.12",
+            "WE.GCREAL.13",
+            "WE.GCREAL.14",
+            "WE.GCREAL.999"
+          ]
+        },
+        "givingCapacityRealEstateRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "<$5K",
+            "$5K-$10K",
+            "$10K-$15K",
+            "$15K-$20K",
+            "$20K-$25K",
+            "$25K-$30K",
+            "$30K-$40K",
+            "$40K-$50K",
+            "$50K-$75K",
+            "$75K-$100K",
+            "$100K-$200K",
+            "$200K-$500K",
+            "$500K-$1MM",
+            "$1MM+",
+            "Unable to rate"
+          ]
+        },
+        "charitableDonationsRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.NPOGIV.1",
+            "WE.NPOGIV.2",
+            "WE.NPOGIV.3",
+            "WE.NPOGIV.4",
+            "WE.NPOGIV.5",
+            "WE.NPOGIV.6",
+            "WE.NPOGIV.7",
+            "WE.NPOGIV.8",
+            "WE.NPOGIV.9",
+            "WE.NPOGIV.10",
+            "WE.NPOGIV.11",
+            "WE.NPOGIV.12",
+            "WE.NPOGIV.13",
+            "WE.NPOGIV.14",
+            "WE.NPOGIV.999"
+          ]
+        },
+        "charitableDonationsRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "<$50",
+            "$50-$150",
+            "$150-$500",
+            "$500-$1K",
+            "$1K-$1.25K",
+            "$1.25K-$2.5K",
+            "$2.5K-$5K",
+            "$5K-$10K",
+            "$10K-$20K",
+            "$20K-$50K",
+            "$50K-$100K",
+            "$100K-$250K",
+            "$250K-$1MM",
+            "$1MM+",
+            "Unable to rate"
+          ]
+        },
+        "givingCapacityAge": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The age used as the input for WealthEngine’s giving capacity rating."
+        },
+        "givingCapacityPensionsRating": {
+          "description": "The pensions rating used as input for WealthEngine's giving capacity rating.",
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.GCPENS.1",
+            "WE.GCPENS.2",
+            "WE.GCPENS.3",
+            "WE.GCPENS.4",
+            "WE.GCPENS.5",
+            "WE.GCPENS.6",
+            "WE.GCPENS.7",
+            "WE.GCPENS.8",
+            "WE.GCPENS.999"
+          ]
+        },
+        "givingCapacityPensionsRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$250K",
+            "$250K-$500K",
+            "$500K-$750K",
+            "$750K-$1MM",
+            "$1MM-$2MM",
+            "$2MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM+",
+            "Unable to rate"
+          ]
+        },
+        "estimatedAnnualDonationsRating": {
+          "description": "Estimated annual donations.",
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.ANNDON.1",
+            "WE.ANNDON.2",
+            "WE.ANNDON.3",
+            "WE.ANNDON.4",
+            "WE.ANNDON.5",
+            "WE.ANNDON.6",
+            "WE.ANNDON.7",
+            "WE.ANNDON.999"
+          ]
+        },
+        "estimatedAnnualDonationsRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "<$1K",
+            "$1K-$5K",
+            "$5K-$10K",
+            "$10K-$25K",
+            "$25K-$50K",
+            "$50K-$100K",
+            "$100K+",
+            "Unable to rate"
+          ]
+        },
+        "givingCapacityGivingRating": {
+          "description": "The giving rating used as input for WealthEngine's giving capacity rating.",
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.GCGIFT.1",
+            "WE.GCGIFT.2",
+            "WE.GCGIFT.3",
+            "WE.GCGIFT.4",
+            "WE.GCGIFT.5",
+            "WE.GCGIFT.6",
+            "WE.GCGIFT.7",
+            "WE.GCGIFT.8",
+            "WE.GCGIFT.9",
+            "WE.GCGIFT.10",
+            "WE.GCGIFT.11",
+            "WE.GCGIFT.12",
+            "WE.GCGIFT.13",
+            "WE.GCGIFT.14",
+            "WE.GCGIFT.15",
+            "WE.GCGIFT.16",
+            "WE.GCGIFT.999"
+          ]
+        },
+        "givingCapacityGivingRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$25",
+            "$25-$50",
+            "$50-$100",
+            "$100-$200",
+            "$200-$300",
+            "$300-$750",
+            "$750-$1.5K",
+            "$1.5K-$3K",
+            "$3K-$5K",
+            "$5K-$10K",
+            "$10K-$25K",
+            "$25K-$50K",
+            "$50K-$100K",
+            "$100K-$500K",
+            "$500K-$1MM",
+            "$1MM+",
+            "Unable to rate"
+          ]
+        },
+        "salesVolumeRating": {
+          "description": "Total sales volume of the business.",
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.BIZVOL.1",
+            "WE.BIZVOL.2",
+            "WE.BIZVOL.3",
+            "WE.BIZVOL.4",
+            "WE.BIZVOL.5",
+            "WE.BIZVOL.6",
+            "WE.BIZVOL.7",
+            "WE.BIZVOL.8",
+            "WE.BIZVOL.999"
+          ]
+        },
+        "salesVolumeRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$500K",
+            "$500K-$1MM",
+            "$1MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM-$25MM",
+            "$25MM-$50MM",
+            "$50MM-$100MM",
+            "$100MM+",
+            "Unable to rate"
+          ]
+        },
+        "bequestRating": {
+          "description": "Good prospects for a planned gift - an annuity, bequest, or trust.",
+          "type": "string",
+          "enum": [
+            "YES",
+            "NO",
+            "null"
+          ]
+        },
+        "politicalDonationsRating": {
+          "description": "The total amount an individual has contributed to political organizations such as super PACs, political funds and other political organizations.",
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.POLDON.1",
+            "WE.POLDON.2",
+            "WE.POLDON.3",
+            "WE.POLDON.4",
+            "WE.POLDON.5",
+            "WE.POLDON.6",
+            "WE.POLDON.7",
+            "WE.POLDON.8",
+            "WE.POLDON.9",
+            "WE.POLDON.10",
+            "WE.POLDON.11",
+            "WE.POLDON.12",
+            "WE.POLDON.13",
+            "WE.POLDON.14",
+            "WE.POLDON.15",
+            "WE.POLDON.16",
+            "WE.POLDON.999"
+          ]
+        },
+        "politicalDonationsRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$25",
+            "$25-$50",
+            "$50-$100",
+            "$100-$200",
+            "$200-$300",
+            "$300-$750",
+            "$750-$1.5K",
+            "$1.5K-$3K",
+            "$3K-$5K",
+            "$5K-$10K",
+            "$10K-$25K",
+            "$25K-$50K",
+            "$50K-$100K",
+            "$100K-$500K",
+            "$500K-$1MM",
+            "$1MM+",
+            "Unable to rate"
+          ]
+        },
+        "influenceRating": {
+          "description": "Level of impact that an individual has with people or organizations based on affluence and\nconnections. Contains a number between 1 (highest) and 4 (lowest) that indicates a quartile.\nA value of 0 means no rating.\n",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "totalDonationsRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.DONTOT.1",
+            "WE.DONTOT.2",
+            "WE.DONTOT.3",
+            "WE.DONTOT.4",
+            "WE.DONTOT.5",
+            "WE.DONTOT.6",
+            "WE.DONTOT.7",
+            "WE.DONTOT.8",
+            "WE.DONTOT.9",
+            "WE.DONTOT.10",
+            "WE.DONTOT.11",
+            "WE.DONTOT.12",
+            "WE.DONTOT.13",
+            "WE.DONTOT.14",
+            "WE.DONTOT.15",
+            "WE.DONTOT.16",
+            "WE.DONTOT.999"
+          ]
+        },
+        "totalDonationsRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$25",
+            "$25-$50",
+            "$50-$100",
+            "$100-$200",
+            "$200-$300",
+            "$300-$750",
+            "$750-$1.5K",
+            "$1.5K-$3K",
+            "$3K-$5K",
+            "$5K-$10K",
+            "$10K-$25K",
+            "$25K-$50K",
+            "$50K-$100K",
+            "$100K-$500K",
+            "$500K-$1MM",
+            "$1MM+",
+            "Unable to rate"
+          ]
+        },
+        "propensityToGiveScore1": {
+          "description": "Propensity to give, 1 is highest. See propensityToGiveRating",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "propensityToGiveRating": {
+          "type": "string",
+          "description": "A descriptive label for the propensityToGiveScore1",
+          "enum": [
+            "Excellent",
+            "Above Average",
+            "Average",
+            "Fair",
+            "No Match"
+          ]
+        },
+        "propensityToGiveScore2": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "inclinationAffiliation": {
+          "type": "string",
+          "enum": [
+            "Older, Significant Political Support",
+            "Significant Political Support",
+            "Older, Moderate Political Support",
+            "Older with no Political Support",
+            "Moderate Political Support",
+            "No Political Support"
+          ]
+        },
+        "pensionsRating": {
+          "type": "string",
+          "enum": [
+            "null",
+            "WE.PENSON.1",
+            "WE.PENSON.2",
+            "WE.PENSON.3",
+            "WE.PENSON.4",
+            "WE.PENSON.5",
+            "WE.PENSON.6",
+            "WE.PENSON.7",
+            "WE.PENSON.8",
+            "WE.PENSON.999"
+          ]
+        },
+        "pensionsRange": {
+          "type": "string",
+          "enum": [
+            "null",
+            "$1-$250K",
+            "$250K-$500K",
+            "$500K-$750K",
+            "$750K-$1MM",
+            "$1MM-$2MM",
+            "$2MM-$5MM",
+            "$5MM-$10MM",
+            "$10MM+",
+            "Unable to rate"
+          ]
+        },
+        "realEstateCount": {
+          "description": "Count of the real estate properties for this record",
+          "type": "integer"
+        },
+        "boardMembership": {
+          "description": "Is member of a board?",
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No",
+            "member"
+          ]
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

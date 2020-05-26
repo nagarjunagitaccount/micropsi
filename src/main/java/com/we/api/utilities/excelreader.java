@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class excelreader {
 	 private static String s = "DataSheet1";
-	 private static String Pathfortestdata = "./src/main/resources/BCC_DataSheet.xls";
+	 private static String Pathfortestdata = "./src/main/resources/We_API_TDATA.xlsx";
 	 private static Map<String, String> map = new HashMap<String, String>();
 
 	 public  String get(String testcasename,String columnname) throws IOException {

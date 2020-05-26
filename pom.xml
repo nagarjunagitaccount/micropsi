@@ -47,7 +47,7 @@
             </build>
             <properties>
                 <host>https://api-pre.welabs.net</host>
-                <apikey>APIKey 0519efd1-a780-4cec-be8f-b6953591858a</apikey>
+                <apikey>APIKey f36f5673-9ad4-483d-8b98-5dd6e31cb15c</apikey>
                 <megakey>APIKey b406922f-4773-42aa-b393-14a3268c1a9e</megakey>
             </properties>
         </profile>
@@ -83,7 +83,7 @@
             <id>QA</id>
             <properties>
                 <host>https://api-qa.welabs.net</host>
-                <apikey>APIKey 7216cf2a-0830-4127-a800-5ec92e119b9d</apikey>
+                <apikey>APIKey 54698db0-fd71-4ed4-914e-22dd825fd750</apikey>
                 <megakey>APIKey 875bbe9d-cceb-4d80-9096-3345da416a12</megakey>
             </properties>
             <build>

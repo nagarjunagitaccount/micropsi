@@ -6,8 +6,8 @@ Feature: Summary full
     Given customer provides summary endpoint with profile details at excel row "<row_index>" dataset
     When  post request to summary full
     Then  the status code should be matching for summary "<row_index>"
-    And   validateresponse at jsonpath "giving.p2g_score.text" and "giving.p2g_score.value" at excel row for summary "<row_index>"
-
+   # And   validateresponse at jsonpath "giving.p2g_score.text" and "giving.p2g_score.value" at excel row for summary "<row_index>"
+    And Validate Schema for Summary-Full
     Examples:
       |row_index|
       |2|

@@ -1,0 +1,2310 @@
+{
+  "description": "Object returned when fetching bulk request result.",
+  "type": "object",
+  "properties": {
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "input"
+        ],
+        "properties": {
+          "input": {
+            "type": "object",
+            "description": "Details on the requested profile",
+            "properties": {
+              "endpoint": {
+                "type": "string",
+                "enum": [
+                  "find_many"
+                ]
+              },
+              "environment": {
+                "type": "string",
+                "enum": [
+                  "prod",
+                  "sandbox"
+                ]
+              },
+              "output_type": {
+                "type": "string",
+                "enum": [
+                  "profile"
+                ]
+              },
+              "query": {
+                "type": "object",
+                "description": "The personal details of the individual",
+                "required": [
+                  "first_name",
+                  "last_name"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "email address that was used in the request"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "phone number that was used in the request"
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "description": "first name (given name)"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "description": "last name (surname)"
+                  },
+                  "address_line1": {
+                    "type": "string",
+                    "description": "house number and street"
+                  },
+                  "address_line2": {
+                    "type": "string",
+                    "description": "suite or apartment"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "municipal center (example: Austin)"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "abbreviated state name (example: TX)"
+                  },
+                  "zip": {
+                    "type": "string",
+                    "description": "5 digit zip code"
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "description": "Client supplied ID passed in the request, will be echoed back with the matching profile"
+                  }
+                }
+              }
+            }
+          },
+          "profile": {
+            "description": "The matched profile.",
+            "type": "object",
+            "required": [
+              "id",
+              "locations"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Unique WealthEngine profile id."
+              },
+              "client_id": {
+                "type": "string",
+                "description": "Client supplied ID passed in the request, will be echoed back with the matching profile"
+              },
+              "identity": {
+                "type": "object",
+                "properties": {
+                  "full_name": {
+                    "type": "string",
+                    "description": "First, Middle, Last and Suffix combined into one single string"
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "description": "First name"
+                  },
+                  "middle_name": {
+                    "type": "string",
+                    "description": "Middle name"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "description": "Last / Surname"
+                  },
+                  "gender": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "Gender as text, 'Male' or 'Female' as examples",
+                        "enum": [
+                          "Male",
+                          "Female"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Gender as an abbreviation, 'M' or 'F' as examples",
+                        "enum": [
+                          "M",
+                          "F"
+                        ]
+                      }
+                    }
+                  },
+                  "age": {
+                    "type": "integer",
+                    "description": "Age as a whole integer"
+                  },
+                  "marital_status": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "string representation of status",
+                        "enum": [
+                          "Maybe Married",
+                          "Maybe Single",
+                          "Married",
+                          "Single"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "value representation of status, single character",
+                        "enum": [
+                          "A",
+                          "B",
+                          "M",
+                          "S"
+                        ]
+                      }
+                    }
+                  },
+                  "emails": {
+                    "type": "array",
+                    "description": "Array of email addresses",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "description": "Email address"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "demographics": {
+                "type": "object",
+                "properties": {
+                  "has_children": {
+                    "type": "boolean",
+                    "description": "True if indivdual has children"
+                  }
+                }
+              },
+              "relationship": {
+                "type": "object",
+                "description": "relationships to this profile",
+                "properties": {
+                  "spouse": {
+                    "type": "object",
+                    "properties": {
+                      "full_name": {
+                        "type": "string",
+                        "description": "First, Middle, Last combined into one single string"
+                      },
+                      "first_name": {
+                        "type": "string",
+                        "description": "First name"
+                      },
+                      "middle_name": {
+                        "type": "string",
+                        "description": "Middle name"
+                      },
+                      "last_name": {
+                        "type": "string",
+                        "description": "Last / Surname"
+                      }
+                    }
+                  }
+                }
+              },
+              "wealth": {
+                "type": "object",
+                "properties": {
+                  "accredited_investor": {
+                    "type": "boolean",
+                    "description": "True if the individual is an accredited investor"
+                  },
+                  "networth": {
+                    "type": "object",
+                    "description": "Total household net worth bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of wealth.networth.text",
+                        "enum": [
+                          "$0",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$500MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of wealth.networth.text",
+                        "enum": [
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$500MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's wealth.networth.value bracket",
+                        "enum": [
+                          "<$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM-$500MM",
+                          "$500MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible net worth bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible net worth bracket value (always 12)",
+                        "enum": [
+                          12
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "This profile's net worth bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "total_income": {
+                    "type": "object",
+                    "description": "Total income of household",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of wealth.total_income.text",
+                        "enum": [
+                          "$1",
+                          "$50K",
+                          "$100K",
+                          "$250K",
+                          "$500K",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of wealth.total_income.text",
+                        "enum": [
+                          "$50K",
+                          "$100K",
+                          "$250K",
+                          "$500K",
+                          "$500K+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's wealth.total_income.value bracket",
+                        "enum": [
+                          "$1-$50K",
+                          "$50K-$100K",
+                          "$100K-$250K",
+                          "$250K-$500K",
+                          "$500K+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible total income bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible total income bracket value (always 5)",
+                        "enum": [
+                          5
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "This profile's total income bracket ",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "cash_on_hand": {
+                    "type": "object",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of wealth.cash_on_hand.text",
+                        "enum": [
+                          "$0",
+                          "$10K",
+                          "$100K",
+                          "$500K",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of wealth.cash_on_hand.text",
+                        "enum": [
+                          "$10K",
+                          "$100K",
+                          "$500K",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's wealth.cash_on_hand.value bracket",
+                        "enum": [
+                          "<$10K",
+                          "$10K-$100K",
+                          "$100K-$500K",
+                          "$500K+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible cash on hand bracket value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible cash on hand bracket value",
+                        "enum": [
+                          4
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's cash on hand bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "business_ownership": {
+                    "type": "object",
+                    "description": "total household business ownership bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of wealth.business_ownership.text",
+                        "enum": [
+                          "$1",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of wealth.business_ownership.text",
+                        "enum": [
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$100MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's wealth.business_ownership.value bracket",
+                        "enum": [
+                          "$1-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible business ownership bracket value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible business ownership bracket value",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's business ownership bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "business_sales_volume": {
+                    "type": "object",
+                    "description": "total household business sales volume bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of wealth.business_sales_volume.text",
+                        "enum": [
+                          "$1",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of wealth.business_sales_volume.text",
+                        "enum": [
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$100MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's wealth.business_sales_volume.value bracket",
+                        "enum": [
+                          "$1-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible business sales volume bracket value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible business sales volume bracket value",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's business sales volume bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "influence_rating": {
+                    "description": "Level of impact that an individual has with people or organizations based on affluence and connections. Contains a number between 1 (highest) and 4 (lowest) that indicates a quartile.",
+                    "type": "object",
+                    "required": [
+                      "text",
+                      "value"
+                    ],
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "Description of influence_rating.value quartile",
+                        "enum": [
+                          "Top Quartile",
+                          "Upper Middle Quartile",
+                          "Bottom Middle Quartile",
+                          "Bottom Quartile"
+                        ]
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 4
+                      }
+                    }
+                  },
+                  "total_stock": {
+                    "type": "object",
+                    "description": "total household stock ownership bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "actual_value": {
+                        "type": "number",
+                        "description": "Actual value of computed total stock ownership"
+                      },
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of wealth.total_stock.text",
+                        "enum": [
+                          "$1",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of wealth.total_stock.text",
+                        "enum": [
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's wealth.total_stock.value bracket",
+                        "enum": [
+                          "$1-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible stock ownership bracket value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible stock ownership bracket value",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's stock ownership bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "stock_holdings_direct": {
+                    "type": "object",
+                    "description": "total household direct stock holdings bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of wealth.stock_holdings_direct.text",
+                        "enum": [
+                          "$1",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of wealth.stock_holdints_direct.text",
+                        "enum": [
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's wealth.stock_holdints_direct.value bracket",
+                        "enum": [
+                          "$1-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible direct stock ownership bracket value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible direct stock ownership bracket value",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's direct stock ownership bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "stock_holdings_indirect": {
+                    "type": "object",
+                    "description": "total household indirect stock ownership bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of wealth.stock_holdings_indirect.text",
+                        "enum": [
+                          "$1",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of wealth.stock_holdings_indirect.text",
+                        "enum": [
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's wealth.stock_holdings_indirect.value bracket",
+                        "enum": [
+                          "$1-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible indirect stock ownership bracket value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible indirect stock ownership bracket value",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's indirect stock ownership bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "investable_assets": {
+                    "type": "object",
+                    "description": "total household's investable assets",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of wealth.investable_assets.text",
+                        "enum": [
+                          "$0",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$500MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of wealth.investable_assets.text",
+                        "enum": [
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$500MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's wealth.investable_assets.value bracket",
+                        "enum": [
+                          "<$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM-$500MM",
+                          "$500MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible investable assets bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible investable assets bracket value (always 12)",
+                        "enum": [
+                          12
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "This profile's investable assets bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "total_assets": {
+                    "type": "object",
+                    "description": "total household's total assets",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of wealth.total_assets.text",
+                        "enum": [
+                          "$0",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$500MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of wealth.total_assets.text",
+                        "enum": [
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "$10MM",
+                          "$25MM",
+                          "$50MM",
+                          "$100MM",
+                          "$500MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's wealth.total_assets.value bracket",
+                        "enum": [
+                          "<$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM-$25MM",
+                          "$25MM-$50MM",
+                          "$50MM-$100MM",
+                          "$100MM-$500MM",
+                          "$500MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible total assets bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible total assets bracket value (always 12)",
+                        "enum": [
+                          12
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "This profile's total assets bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "total_pensions": {
+                    "type": "object",
+                    "description": "total household total pensions bracket",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of wealth.total_pensions.text",
+                        "enum": [
+                          "$1",
+                          "$250K",
+                          "$500K",
+                          "$750K",
+                          "$1MM",
+                          "$2MM",
+                          "$5MM",
+                          "$10MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of wealth.total_pensions.text",
+                        "enum": [
+                          "$250K",
+                          "$500K",
+                          "$750K",
+                          "$1MM",
+                          "$2MM",
+                          "$5MM",
+                          "$10MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's wealth.total_pensions.value bracket",
+                        "enum": [
+                          "$1-$250K",
+                          "$250K-$500K",
+                          "$500K-$750K",
+                          "$750K-$1MM",
+                          "$1MM-$2MM",
+                          "$2MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible total pensions bracket value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible total pensions bracket value",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's total pensions bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          999
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "realestate": {
+                "type": "object",
+                "description": "Information about physical properties owned by a person",
+                "properties": {
+                  "total_num_properties": {
+                    "type": "integer",
+                    "description": "Number of properties owned by this profile"
+                  },
+                  "total_real_estate_value": {
+                    "type": "object",
+                    "description": "Bracketed sum of worth in dollars of this profile's owned property",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "actual_value": {
+                        "type": "number",
+                        "description": "Total value of properties owned"
+                      },
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of realestate.total_realestate_value.text",
+                        "enum": [
+                          "$1",
+                          "$250K",
+                          "$500K",
+                          "$750K",
+                          "$1MM",
+                          "$2MM",
+                          "$5MM",
+                          "$10MM",
+                          "Unable to Rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of realestate.total_realestate_value.text",
+                        "enum": [
+                          "$250K",
+                          "$500K",
+                          "$750K",
+                          "$1MM",
+                          "$2MM",
+                          "$5MM",
+                          "$10MM",
+                          "Unable to Rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's realestate.total_realestate_value.value bracket",
+                        "enum": [
+                          "$1-$250K",
+                          "$250K-$500K",
+                          "$500K-$750K",
+                          "$750K-$1MM",
+                          "$1MM-$2MM",
+                          "$2MM-$5MM",
+                          "$5MM-$10MM",
+                          "$10MM+",
+                          "Unable to Rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible real estate bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible real estate bracket value (always 8)",
+                        "enum": [
+                          8
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "Value of this profile's real estate ownership bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          999
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "locations": {
+                "type": "array",
+                "description": "an array of objects that contain geographical information",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "object",
+                      "description": "A mailing address for a location",
+                      "properties": {
+                        "street_line1": {
+                          "type": "string",
+                          "description": "Street address."
+                        },
+                        "street_line2": {
+                          "type": "string",
+                          "description": "Suite/Apartment."
+                        },
+                        "street_line3": {
+                          "type": "string",
+                          "description": "Additional address details"
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City"
+                        },
+                        "state": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "full state name (example: Texas)"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "2 letter state code (example: TX)"
+                            }
+                          }
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "5 digit zip code"
+                        }
+                      }
+                    },
+                    "personal_phone": {
+                      "type": "string",
+                      "description": "Personal phone number"
+                    }
+                  }
+                }
+              },
+              "giving": {
+                "type": "object",
+                "description": "Charitable information about a person",
+                "properties": {
+                  "affiliation_inclination": {
+                    "type": "object",
+                    "description": "details on profile's affiliation",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "minimum": 1,
+                        "maximum": 6
+                      },
+                      "text": {
+                        "type": "string",
+                        "enum": [
+                          "Older, Significant Political Support",
+                          "Significant Political Support",
+                          "Older, Moderate Political Support",
+                          "Older with no Political Support",
+                          "Moderate Political Support",
+                          "No Political Support"
+                        ]
+                      }
+                    }
+                  },
+                  "planned_giving": {
+                    "type": "array",
+                    "description": "array describing a profile's likelyhood to Bequest, Grant Annuity or Create Trust",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "description": "string stating whether a profile is Likely or Very Likely",
+                          "enum": [
+                            "Likely to Grant Annuity",
+                            "Very Likely to Grant Annuity",
+                            "Likely to Bequest",
+                            "Likely to Create Trust",
+                            "Very Likely to Create Trust"
+                          ]
+                        },
+                        "value": {
+                          "type": "integer",
+                          "description": "value that matches to the string above",
+                          "minimum": 83,
+                          "maximum": 87
+                        }
+                      }
+                    }
+                  },
+                  "charitable_donations": {
+                    "type": "object",
+                    "description": "total household's charitable donations",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of giving.charitable_donations.text",
+                        "enum": [
+                          "$0",
+                          "$50",
+                          "$150",
+                          "$500",
+                          "$1K",
+                          "$1.25K",
+                          "$2.5K",
+                          "$5K",
+                          "$10K",
+                          "$20K",
+                          "$50K",
+                          "$100K",
+                          "$250K",
+                          "$1MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of giving.charitable_donations.text",
+                        "enum": [
+                          "$50",
+                          "$150",
+                          "$500",
+                          "$1K",
+                          "$1.25K",
+                          "$2.5K",
+                          "$5K",
+                          "$10K",
+                          "$20K",
+                          "$50K",
+                          "$100K",
+                          "$250K",
+                          "$1MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's giving.charitable_donations.value bracket",
+                        "enum": [
+                          "<$50",
+                          "$50-$150",
+                          "$150-$500",
+                          "$500-$1K",
+                          "$1K-$1.25K",
+                          "$1.25K-$2.5K",
+                          "$2.5K-$5K",
+                          "$5K-$10K",
+                          "$10K-$20K",
+                          "$20K-$50K",
+                          "$50K-$100K",
+                          "$100K-$250K",
+                          "$250K-$1MM",
+                          "$1MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible charitable donations value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible charitable donations value (always 14)",
+                        "enum": [
+                          14
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's charitable donations (always a value from 1 to 14)",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "total_political_donations": {
+                    "type": "object",
+                    "description": "total household's total political donations",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of giving.total_political_donations.text",
+                        "enum": [
+                          "$1",
+                          "$25",
+                          "$50",
+                          "$100",
+                          "$200",
+                          "$300",
+                          "$750",
+                          "$1.5K",
+                          "$3K",
+                          "$5K",
+                          "$10K",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of giving.total_political_donations.text",
+                        "enum": [
+                          "$25",
+                          "$50",
+                          "$100",
+                          "$200",
+                          "$300",
+                          "$750",
+                          "$1.5K",
+                          "$3K",
+                          "$5K",
+                          "$10K",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's giving.total_political_donations.value",
+                        "enum": [
+                          "$1-$25",
+                          "$25-$50",
+                          "$50-$100",
+                          "$100-$200",
+                          "$200-$300",
+                          "$300-$750",
+                          "$750-$1.5K",
+                          "$1.5K-$3K",
+                          "$3K-$5K",
+                          "$5K-$10K",
+                          "$10K-$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K-$500K",
+                          "$500K-$1MM",
+                          "$1MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible total political donations value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible total political donations value",
+                        "enum": [
+                          16
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's total political donations",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15,
+                          16,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "total_donations": {
+                    "type": "object",
+                    "description": "total household's total donations",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "lower bounds of giving.total_donations.text",
+                        "enum": [
+                          "$1",
+                          "$25",
+                          "$50",
+                          "$100",
+                          "$200",
+                          "$300",
+                          "$750",
+                          "$1.5K",
+                          "$3K",
+                          "$5K",
+                          "$10K",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "upper bounds of giving.total_donations.text",
+                        "enum": [
+                          "$25",
+                          "$50",
+                          "$100",
+                          "$200",
+                          "$300",
+                          "$750",
+                          "$1.5K",
+                          "$3K",
+                          "$5K",
+                          "$10K",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "$500K",
+                          "$1MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "descriptive text for this profile's giving.total_donations.value",
+                        "enum": [
+                          "$1-$25",
+                          "$25-$50",
+                          "$50-$100",
+                          "$100-$200",
+                          "$200-$300",
+                          "$300-$750",
+                          "$750-$1.5K",
+                          "$1.5K-$3K",
+                          "$3K-$5K",
+                          "$5K-$10K",
+                          "$10K-$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K-$500K",
+                          "$500K-$1MM",
+                          "$1MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "lowest possible total donations value",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "highest possible total donations value",
+                        "enum": [
+                          16
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "this profile's total donations",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15,
+                          16,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "estimated_annual_donations": {
+                    "type": "object",
+                    "description": "Amount a person is likely to give in 1 year, in dollars",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of giving.estimated_annual_donations.text",
+                        "enum": [
+                          "$0",
+                          "$1K",
+                          "$5K",
+                          "$10K",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of giving.estimated_annual_donations.text",
+                        "enum": [
+                          "$1K",
+                          "$5K",
+                          "$10K",
+                          "$25K",
+                          "$50K",
+                          "$100K",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's giving.estimated_annual_donations.value bracket",
+                        "enum": [
+                          "<$1K",
+                          "$1K-$5K",
+                          "$5K-$10K",
+                          "$10K-$25K",
+                          "$25K-$50K",
+                          "$50K-$100K",
+                          "$100K+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible estimated annual donations bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible estimated annual donations bracket value (always 7)",
+                        "enum": [
+                          7
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "Value of this profile's estimated annual bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "gift_capacity": {
+                    "type": "object",
+                    "description": "What a person could possibly give over 5 years",
+                    "required": [
+                      "text_low",
+                      "text_high",
+                      "text",
+                      "min",
+                      "max",
+                      "value"
+                    ],
+                    "properties": {
+                      "actual_value": {
+                        "type": "number",
+                        "description": "Actual value of computed total gift capacity"
+                      },
+                      "text_low": {
+                        "type": "string",
+                        "description": "Lower bounds of giving.gift_capacity.text",
+                        "enum": [
+                          "$0",
+                          "$1K",
+                          "$2K",
+                          "$3K",
+                          "$5K",
+                          "$7.5K",
+                          "$10K",
+                          "$15K",
+                          "$20K",
+                          "$25K",
+                          "$30K",
+                          "$40K",
+                          "$50K",
+                          "$75K",
+                          "$100K",
+                          "$200K",
+                          "$300K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text_high": {
+                        "type": "string",
+                        "description": "Upper bounds of giving.gift_capacity.text",
+                        "enum": [
+                          "$1K",
+                          "$2K",
+                          "$3K",
+                          "$5K",
+                          "$7.5K",
+                          "$10K",
+                          "$15K",
+                          "$20K",
+                          "$25K",
+                          "$30K",
+                          "$40K",
+                          "$50K",
+                          "$75K",
+                          "$100K",
+                          "$200K",
+                          "$300K",
+                          "$500K",
+                          "$1MM",
+                          "$5MM",
+                          "Unable to rate"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Descriptive text for this profile's giving.gift_capacity.value bracket",
+                        "enum": [
+                          "<$1K",
+                          "$1K-$2K",
+                          "$2K-$3K",
+                          "$3K-$5K",
+                          "$5K-$7.5K",
+                          "$7.5K-$10K",
+                          "$10K-$15K",
+                          "$15K-$20K",
+                          "$20K-$25K",
+                          "$25K-$30K",
+                          "$30K-$40K",
+                          "$40K-$50K",
+                          "$50K-$75K",
+                          "$75K-$100K",
+                          "$100K-$200K",
+                          "$200K-$300K",
+                          "$300K-$500K",
+                          "$500K-$1MM",
+                          "$1MM-$5MM",
+                          "$5MM+",
+                          "Unable to rate"
+                        ]
+                      },
+                      "min": {
+                        "type": "integer",
+                        "description": "Lowest possible gift capacity bracket value (always 1)",
+                        "enum": [
+                          1
+                        ]
+                      },
+                      "max": {
+                        "type": "integer",
+                        "description": "Highest possible gift capacity bracket value (always 20)",
+                        "enum": [
+                          20
+                        ]
+                      },
+                      "value": {
+                        "type": "integer",
+                        "description": "Value of this profile's gift capacity bracket",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15,
+                          16,
+                          17,
+                          18,
+                          19,
+                          20,
+                          999
+                        ]
+                      }
+                    }
+                  },
+                  "egc_component": {
+                    "type": "object",
+                    "properties": {
+                      "gcPesions": {
+                        "type": "integer",
+                        "description": "Gift Capacity Pension Rating,lookupref:gcp_pension",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8
+                        ]
+                      },
+                      "gcStocks": {
+                        "type": "integer",
+                        "description": "Gift Capacity Stock Rating,lookupref:gcp_stocks",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8
+                        ]
+                      },
+                      "gcIncome": {
+                        "type": "integer",
+                        "description": "Gift Capacity Income Rating,lookupref:gcp_income",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11
+                        ]
+                      },
+                      "gcGiftRating": {
+                        "type": "integer",
+                        "description": "Gift Capacity Giving Rating,lookup:estimated_giving_capacity",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15,
+                          16,
+                          17,
+                          18,
+                          19,
+                          20
+                        ]
+                      },
+                      "gcRealEstate": {
+                        "type": "integer",
+                        "description": "Gift Capacity Real Estate Rating,lookupref:gcp_real_estate",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14
+                        ]
+                      }
+                    }
+                  },
+                  "p2g_score": {
+                    "type": "object",
+                    "description": "This profile's propensity to give",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "Text describing this profile's P2G score",
+                        "enum": [
+                          "1|0 - Excellent",
+                          "1|1 - Excellent",
+                          "1|2 - Excellent",
+                          "1|3 - Excellent",
+                          "1|4 - Excellent",
+                          "1|5 - Excellent",
+                          "2|1 - Above Average",
+                          "2|2 - Above Average",
+                          "2|3 - Above Average",
+                          "2|4 - Above Average",
+                          "2|5 - Above Average",
+                          "3|1 - Average",
+                          "3|2 - Average",
+                          "3|3 - Average",
+                          "3|4 - Average",
+                          "3|5 - Average",
+                          "3|6 - Average",
+                          "4|0 - Fair",
+                          "5|0 - No Match"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Value of this profile's propensity to give score",
+                        "enum": [
+                          "10",
+                          "11",
+                          "12",
+                          "13",
+                          "14",
+                          "15",
+                          "21",
+                          "22",
+                          "23",
+                          "24",
+                          "25",
+                          "31",
+                          "32",
+                          "33",
+                          "34",
+                          "35",
+                          "36",
+                          "40",
+                          "50"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "professional": {
+                "type": "object",
+                "properties": {
+                  "board_member": {
+                    "type": "boolean",
+                    "description": "true if profile is a board member"
+                  }
+                }
+              },
+              "vehicles": {
+                "type": "object",
+                "properties": {
+                  "ownership": {
+                    "type": "array",
+                    "description": "array of objects detailing vehicle ownership",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "description": "string stating whether profile owns a Boat or Plane",
+                          "enum": [
+                            "Aircraft Owner",
+                            "Boat Owner"
+                          ]
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "vehicle type code corresponding to above string",
+                          "enum": [
+                            "856",
+                            "857"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "jobs": {
+                "type": "array",
+                "description": "Array of business contact info",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "org_name": {
+                      "type": "string",
+                      "description": "business name"
+                    },
+                    "org_type": {
+                      "type": "object",
+                      "description": "business object to describe the business",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "description": "string indicating whether it is a business or nonprofit",
+                          "enum": [
+                            "Business",
+                            "Nonprofit",
+                            "Political"
+                          ]
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "shorthand indicating whether it is a business (B) or nonprofit (NP)",
+                          "enum": [
+                            "B",
+                            "NP",
+                            "POL"
+                          ]
+                        }
+                      }
+                    },
+                    "phone": {
+                      "type": "string",
+                      "description": "business phone"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "business email"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "job title associated with this job"
+                    },
+                    "address": {
+                      "type": "object",
+                      "description": "A mailing address for this job",
+                      "properties": {
+                        "street_line1": {
+                          "type": "string",
+                          "description": "Street address."
+                        },
+                        "street_line2": {
+                          "type": "string",
+                          "description": "Suite/Apartment."
+                        },
+                        "street_line3": {
+                          "type": "string",
+                          "description": "Additional address details"
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City"
+                        },
+                        "state": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "full state name (example: Texas)"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "2 letter state code (example: TX)"
+                            }
+                          }
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "5 digit zip code"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

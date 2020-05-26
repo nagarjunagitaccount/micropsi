@@ -37,6 +37,7 @@ Find many
     Then call jobstatus endpoint to check the status
     Then call Profiles summary results endpoint with batchid
     Then  the status code should be matching for findmany basic "<startindex>"
+    And validate Schema for Profiles summary
 
     Examples:
       |startindex|endindex|

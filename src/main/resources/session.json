@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string",
+      "description": "Session key to use in subsequent API requests"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "The user's id"
+    },
+    "customer_id": {
+      "type": "string",
+      "description": "The user's customer id"
+    },
+    "create_ts": {
+      "type": "integer",
+      "description": "UNIX time stamp when the session key will start working"
+    },
+    "expire_ts": {
+      "type": "integer",
+      "description": "UNIX time stamp when the session key will stop working"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

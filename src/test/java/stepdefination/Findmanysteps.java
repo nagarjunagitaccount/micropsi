@@ -19,6 +19,7 @@ import org.testng.Assert;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.apache.http.conn.params.ConnManagerParams.setTimeout;
 
 public class Findmanysteps {
@@ -152,5 +153,9 @@ public void customer_provides_Findmany_endpoint_with_profile_details_at_excel_ro
 		String responseString = response.asString();
 		System.out.println(responseString);
 		Assert.assertNotNull(responseString);
+	}
+	@Then("^validate Schema for Profiles summary$")
+	public void validate_Schema_for_Profiles_summary() throws Throwable {
+		response.then().assertThat().body(matchesJsonSchemaInClasspath("ProfilesSummary.json"));
 	}
 }

@@ -38,6 +38,7 @@ Feature: Scoreone
     Given customer provides Scoreone endpoint with summary at excel row "<row_index>" and "<modelcount>" dataset
     When  post request to score profile
     Then  the status code should be matching for scoreone "<row_index>"
+    #And validate Schema for Scoreprofile
 
 
     Examples:

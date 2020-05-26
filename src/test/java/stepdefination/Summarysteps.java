@@ -2,6 +2,7 @@ package stepdefination;
 
 import com.api.pojo.Phone;
 import com.api.pojo.Summary;
+import com.api.resources.jsonpath;
 import com.api.resources.resources;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
@@ -10,6 +11,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class Summarysteps {
 	private Response response;
@@ -71,9 +74,36 @@ public class Summarysteps {
 	@Then("^validateresponse at jsonpath \"([^\"]*)\" and \"([^\"]*)\" at excel row for summary \"([^\"]*)\"$")
 	public void validateresponse_at_jsonpath_and_at_excel_row_for_summary(String arg1, String arg2, String arg3) throws Throwable {
 		int index = Integer.parseInt(arg3)-1;
-		Assert.assertEquals(response.body().jsonPath().getJsonObject(arg1).toString() /*actual value*/, datamap.get(index).get("P2G-text") /*expected value*/, "P2G score text is matching");
+	Assert.assertEquals(response.body().jsonPath().getJsonObject(arg1).toString() /*actual value*/, datamap.get(index).get("P2G-text") /*expected value*/, "P2G score text is matching");
 		Assert.assertEquals(response.body().jsonPath().getJsonObject(arg2).toString() /*actual value*/, datamap.get(index).get("P2G-value") /*expected value*/, "P2G score value is matching");
+
 	}
+
+//@Then("^validateresponse at jsonpath \"([^\"]*)\" and \"([^\"]*)\" at excel row for summary \"([^\"]*)\"$")
+//public void validateresponse_at_jsonpath_and_at_excel_row_for_summary(String Object, String value1, String value2,String arg3) throws Throwable {
+//		int index = Integer.parseInt(arg3)-1;
+//	String responseString=response.body().jsonPath().getJsonObject(Object).toString();
+//	Assert.assertEquals(response.body().jsonPath().getJsonObject(value1).toString() /*actual value*/, datamap.get(index).get("P2G-text") /*expected value*/, "P2G score text is matching");
+//
+//	}
+	@Then("^validateresponse at jsonpath \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" at excel row for summary \"([^\"]*)\"$")
+	public void validateresponse_at_jsonpath_and_and_at_excel_row_for_summary(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+		int index = Integer.parseInt(arg4)-1;
+		JsonPath jsonPathEvaluator = response.jsonPath();
+		System.out.println(jsonPathEvaluator.getJsonObject(arg1));
+		//String responseString=response.body().jsonPath().getJsonObject(arg1).toString();
+		//Assert.assertEquals(response.body().jsonPath().getJsonObject(arg2).toString() /*actual value*/, datamap.get(index).get("P2G-text") /*expected value*/, "P2G score text is matching");
+
+	}
+	@Then("^Validate Schema for Summary-basic$")
+	public void validate_Schema_for_Summary_basic() throws Throwable {
+		response.then().assertThat().body(matchesJsonSchemaInClasspath("Profilesummarybasic.json"));
+	}
+	@Then("^Validate Schema for Summary-Full$")
+	public void validate_Schema_for_Summary_Full() throws Throwable {
+		response.then().assertThat().body(matchesJsonSchemaInClasspath("Profilesummaryfull.json"));
+	}
+
 
 
 }

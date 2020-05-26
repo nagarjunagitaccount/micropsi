@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.hasKey;
 
 public class Scoreonesteps {
@@ -164,6 +165,10 @@ public class Scoreonesteps {
         json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
         String responseString=response.asString();
         Assert.assertNotNull(responseString);
+    }
+    @Then("^validate Schema for Scoreprofile$")
+    public void validate_Schema_for_Scoreprofile() throws Throwable {
+        response.then().assertThat().body(matchesJsonSchemaInClasspath("ProfileScore.json"));
     }
 }
 
