@@ -47,8 +47,8 @@
             </build>
             <properties>
                 <host>https://api-pre.welabs.net</host>
-                <apikey>APIKey f36f5673-9ad4-483d-8b98-5dd6e31cb15c</apikey>
-                <megakey>APIKey b406922f-4773-42aa-b393-14a3268c1a9e</megakey>
+                <apikey>APIKey 00853d8f-c5eb-4c13-915c-ed386681342a</apikey>
+                <megakey>APIKey d1258fc9-e279-4bb8-b03b-2f77fe7802a0</megakey>
             </properties>
         </profile>
         <profile>
@@ -56,7 +56,7 @@
             <properties>
                 <host>https://api.wealthengine.com</host>
                 <apikey>APIKey ca5ec927-cc2b-4c52-ae85-423d9355d147</apikey>
-                <megakey>APIKey 37e6c4cd-0d38-44bf-b65e-ec95f6a10ea2</megakey>
+                <megakey>APIKey 3834f837-da12-4815-941f-76d7ad33ab1f</megakey>
             </properties>
             <build>
                 <resources>
