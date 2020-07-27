@@ -2,6 +2,8 @@ package stepdefination;
 
 import com.api.pojo.*;
 import com.api.resources.resources;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
 import cucumber.api.java.Before;
@@ -57,12 +59,14 @@ public class Megacallsteps {
 		response = request.when().post(resources.getmegacall());
 		String responseString=response.asString();
 		batchID=response.jsonPath().getString("batchID");
+		Reporter.addStepLog("batchID"+" "+response.prettyPrint());
 	}
 
 	@Then("^the status code should be matching for megacall \"([^\"]*)\"$")
 	public void the_status_code_should_be_matching_for_megacall(String arg1) throws Throwable {
 		int index = Integer.parseInt(arg1)-1;
 		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
+		Reporter.addStepLog("Response code"+" "+response.statusCode());
 		String responseString=response.asString();
 		Assert.assertNotNull(responseString);
 	}
@@ -82,6 +86,9 @@ public class Megacallsteps {
 		}
 
 		Megacall profilesobject=new Megacall(profiles);
+		String formattedjson=new GsonBuilder().setPrettyPrinting()
+				.create().toJson(profilesobject);
+		Reporter.addStepLog("Request "+" "+formattedjson);
 		return  profilesobject;
 	}
 	@Then("^call megacall jobstatus endpoint to check the status$")
@@ -128,8 +135,8 @@ public class Megacallsteps {
 				header("Content-Type", "application/json").log().uri().
 				header("authorization", DataAccessConf.get().getmegakey()).
 				when().get(resources.getmegacallresults());
+		Reporter.addStepLog("Response"+response.prettyPrint());
 		String responseString = response.asString();
-		System.out.println(responseString);
 		Assert.assertNotNull(responseString);
 	}
 }

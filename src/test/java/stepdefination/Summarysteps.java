@@ -4,6 +4,8 @@ import com.api.pojo.Phone;
 import com.api.pojo.Summary;
 import com.api.resources.jsonpath;
 import com.api.resources.resources;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
 import cucumber.api.java.Before;
@@ -49,25 +51,33 @@ public class Summarysteps {
 		RestAssured.baseURI=DataAccessConf.get().gethost();
 		Summary summary=new Summary(datamap.get(index).get("Firstname"),datamap.get(index).get("LastName"),datamap.get(index).get("Address"),"",datamap.get(index).get("City"),datamap.get(index).get("State"),datamap.get(index).get("Zip"),datamap.get(index).get("Email"),datamap.get(index).get("Phone"));
 
+
 		request=given().
 				header("Content-Type","application/json").
 				header("authorization",DataAccessConf.get().getapikey()).
 				request().body(summary).log().body().log().uri().log().headers();
+		String formattedjson=new GsonBuilder().setPrettyPrinting()
+				.create().toJson(summary);
+		Reporter.addStepLog("Request "+" "+formattedjson);
 	}
 
 	@When("^post request to summary basic$")
 	public void post_request_to_summary_basic() throws Throwable {
 		response = request.when().post(resources.getsummarybasic());
+		Reporter.addStepLog("response"+response.prettyPrint());
+
 	}
 	@When("^post request to summary full$")
 	public void post_request_to_summary_full() throws Throwable {
 		response = request.when().post(resources.getsummaryfull());
+		Reporter.addStepLog("response"+response.prettyPrint());
 	}
 	@Then("^the status code should be matching for summary \"([^\"]*)\"$")
 	public void the_status_code_should_be_matching_for_summary(String arg1) throws Throwable {
 		int index = Integer.parseInt(arg1)-1;
 		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
 		String responseString=response.asString();
+		Reporter.addStepLog("Response code"+" "+response.statusCode());
 		Assert.assertNotNull(responseString);
 	}
 

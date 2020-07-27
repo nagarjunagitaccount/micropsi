@@ -3,6 +3,8 @@ package stepdefination;
 import static io.restassured.RestAssured.given;
 
 import com.api.pojo.Address;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataHelper;
 import org.testng.Assert;
 
@@ -55,6 +57,9 @@ public class FindonebyAddresssteps {
 				header("Content-Type","application/json").
 				header("authorization",DataAccessConf.get().getapikey()).
 				request().body(address).log().body().log().uri().log().headers();
+		String formattedjson=new GsonBuilder().setPrettyPrinting()
+				.create().toJson(address);
+		Reporter.addStepLog("Request "+" "+formattedjson);
 
 	}
 
@@ -62,16 +67,19 @@ public class FindonebyAddresssteps {
 	@When("^post request to find_one address basic$")
 	public void post_request_to_find_one_address_basic() throws Throwable {
 		response = request.when().post(resources.getfindonebyaddressbybasic());
+		Reporter.addStepLog("response"+" "+response.prettyPrint());
 	}
 	@When("^post request to find_one address full$")
 	public void post_request_to_find_one_address_full() throws Throwable {
 		response = request.when().post(resources.getfindonebyaddressbyfull());
+		Reporter.addStepLog("response"+" "+response.prettyPrint());
 	}
 
 	@Then("^the status code should be matching at excel row \"([^\"]*)\"$")
 	public void the_status_code_should_be_matching_at_excel_row(String arg1) throws Throwable {
 		int index = Integer.parseInt(arg1)-1;
 		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
+		Reporter.addStepLog("Response code"+" "+response.statusCode());
 		String responseString=response.asString();
 		Assert.assertNotNull(responseString);
 	}

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-//import com.vimalselvam.cucumber.listener.ExtentCucumberFormatter;
+import com.cucumber.listener.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -25,7 +25,7 @@ import cucumber.api.CucumberOptions;
 
 
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-
+/*
 @CucumberOptions(
         features="src/test/java/features", glue = "stepdefination",
         plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json",
@@ -35,18 +35,28 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
                 "html:target/cucumber-reports"},
       tags = {"@smoke"}
 )
+*/
+
+@CucumberOptions(features = { "src/test/java/features" }, glue = {
+        "stepdefination" }, monochrome = true, tags = {"@smoke"},
+        plugin = { "pretty", "html:target/cucumber", "json:target/cucumber.json",
+                "com.cucumber.listener.ExtentCucumberFormatter:output/extentreport.html" }
+
+                )
+
 
 
 public class CucumberRunner extends AbstractTestNGCucumberTests
 {
-    @BeforeClass
+    //@BeforeClass
+    @AfterClass
     public static void setup() throws IOException {
-
-
+/*
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy_hhmmss");
         Date curDate = new Date();
         String strDate = sdf.format(curDate);
         String fileName = System.getProperty("user.dir") + "//target//Extent_Reports//" + strDate + ".html";
+
 
         File newFile = new File(fileName);
         ExtentCucumberFormatter.initiateExtentCucumberFormatter(newFile, true);
@@ -61,6 +71,10 @@ public class CucumberRunner extends AbstractTestNGCucumberTests
         systemInfo.put("Cucumber version", "v1.2.3");
         systemInfo.put("Extent Cucumber Reporter version", "v1.1.0");
         ExtentCucumberFormatter.addSystemInfo(systemInfo);
+
+ */
+
+      Reporter.loadXMLConfig(new File("src/main/resources/extent-config.xml"));
 
 
     }

@@ -3,6 +3,8 @@ package stepdefination;
 import com.api.pojo.Profiles;
 import com.api.pojo.Summary;
 import com.api.resources.resources;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
 import cucumber.api.java.Before;
@@ -60,12 +62,14 @@ public void customer_provides_Findmany_endpoint_with_profile_details_at_excel_ro
 		response = request.when().post(resources.getfindmanybasic());
 		String responseString=response.asString();
 		batchID=response.jsonPath().getString("batchID");
+		Reporter.addStepLog("batchID"+" "+response.prettyPrint());
 	}
 	@When("^post request to findmany full$")
 	public void post_request_to_findmany_full() throws Throwable {
 		response = request.when().post(resources.getfindmanyfull());
 		String responseString=response.asString();
 		batchID=response.jsonPath().getString("batchID");
+		Reporter.addStepLog("batchID"+" "+response.prettyPrint());
 	}
 	@When("^post request to Profiles Summary$")
 	public void post_request_to_ProfilesSummary() throws Throwable {
@@ -78,6 +82,7 @@ public void customer_provides_Findmany_endpoint_with_profile_details_at_excel_ro
 	public void the_status_code_should_be_matching_for_findmany_basic(String arg1) throws Throwable {
 		int index = Integer.parseInt(arg1)-1;
 		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
+		Reporter.addStepLog("Response code"+" "+response.statusCode());
 		String responseString=response.asString();
 		Assert.assertNotNull(responseString);
 	}
@@ -91,6 +96,9 @@ public void customer_provides_Findmany_endpoint_with_profile_details_at_excel_ro
 	    }
 
 		Profiles profilesobject=new Profiles(profiles);
+		String formattedjson=new GsonBuilder().setPrettyPrinting()
+				.create().toJson(profilesobject);
+		Reporter.addStepLog("Request "+" "+formattedjson);
 		return  profilesobject;
 	}
 	@Then("^call jobstatus endpoint to check the status$")
@@ -138,8 +146,8 @@ public void customer_provides_Findmany_endpoint_with_profile_details_at_excel_ro
 				header("Content-Type", "application/json").log().uri().
 				header("authorization", DataAccessConf.get().getapikey()).
 				when().get(resources.getfindmanyresults());
+		Reporter.addStepLog("response"+response.prettyPrint());
 		String responseString = response.asString();
-		System.out.println(responseString);
 		Assert.assertNotNull(responseString);
 	}
 	@Then("^call Profiles summary results endpoint with batchid$")

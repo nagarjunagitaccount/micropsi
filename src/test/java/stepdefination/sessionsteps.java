@@ -2,6 +2,8 @@ package stepdefination;
 
 import com.api.pojo.Session;
 import com.api.resources.resources;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
 import cucumber.api.java.en.Given;
@@ -44,6 +46,7 @@ public class sessionsteps {
     @When("^post to createsession api$")
     public void post_to_createsession_api() throws Throwable {
         response = request.when().post(resources.getcreatesession());
+        Reporter.addStepLog("response"+" "+response.prettyPrint());
 
     }
 
@@ -65,13 +68,17 @@ public class sessionsteps {
                 header("Content-Type","application/json").
                 header("authorization",DataAccessConf.get().getapikey()).
                 request().body(payload).log().body().log().uri().log().headers();
+        String formattedjson=new GsonBuilder().setPrettyPrinting()
+                .create().toJson(payload);
+        Reporter.addStepLog("Request "+" "+formattedjson);
     }
 
     @Then("^validate response code at excel row \"([^\"]*)\"$")
     public void validate_response_code_at_excel_row(String arg1) throws Throwable {
         int index = Integer.parseInt(arg1)-1;
 	    json = response.then().statusCode(Integer.parseInt(datamap.get(index).get("Statuscode"))).log().body().and().body("$", hasKey("_id"));
-        String responseString=response.asString();
+        Reporter.addStepLog("Response code"+" "+response.statusCode());
+	    String responseString=response.asString();
         Assert.assertNotNull(responseString);
     }
 }

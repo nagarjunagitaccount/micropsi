@@ -2,6 +2,8 @@ package stepdefination;
 
 import com.api.pojo.*;
 import com.api.resources.resources;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
 import cucumber.api.java.Before;
@@ -182,6 +184,7 @@ public void customer_provides_Scoreprofiles_endpoint_with_profiles_at_excel_row_
     public void post_request_to_score_profiles() throws Throwable {
         response = request.when().post(resources.getscorebyprofiles());
         batchID=response.jsonPath().getString("batchID");
+        Reporter.addStepLog("response Batchid"+response.prettyPrint());
     }
     @When("^post request to profiles score$")
     public void post_request_to_profiles_score() throws Throwable {
@@ -194,6 +197,7 @@ public void customer_provides_Scoreprofiles_endpoint_with_profiles_at_excel_row_
         int index = Integer.parseInt(arg1)-1;
         json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
         String responseString=response.asString();
+        Reporter.addStepLog("Response code"+" "+response.statusCode());
         Assert.assertNotNull(responseString);
     }
     public Scoreprofiles getprofilesforscore(int startindex,int endindex,int count,List<HashMap<String,String>> datamap)
@@ -208,6 +212,9 @@ public void customer_provides_Scoreprofiles_endpoint_with_profiles_at_excel_row_
         }
 
         Scoreprofiles profilesobject=new Scoreprofiles(profiles);
+        String formattedjson=new GsonBuilder().setPrettyPrinting()
+                .create().toJson(profilesobject);
+        Reporter.addStepLog("Request "+" "+formattedjson);
         return  profilesobject;
     }
 
@@ -246,8 +253,8 @@ public void customer_provides_Scoreprofiles_endpoint_with_profiles_at_excel_row_
                 header("Content-Type", "application/json").log().uri().
                 header("authorization", DataAccessConf.get().getapikey()).
                 when().get(resources.getscoreprofileresults());
+        Reporter.addStepLog("response"+response.prettyPrint());
         String responseString = response.asString();
-        System.out.println(responseString);
         Assert.assertNotNull(responseString);
     }
     @Then("^call profiles score results endpoint with batchid$")

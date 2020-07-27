@@ -2,6 +2,8 @@ package stepdefination;
 
 import com.api.pojo.*;
 import com.api.resources.resources;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
 import cucumber.api.java.Before;
@@ -51,6 +53,7 @@ public class Scoreonesteps {
     @When("^post request to scoreone address$")
     public void post_request_to_scoreone_address() throws Throwable {
         response = request.when().post(resources.getscoreonebyaddress());
+        Reporter.addStepLog("response"+response.prettyPrint());
     }
     @Given("^customer provides Scoreone endpoint with Address at excel row \"([^\"]*)\" dataset$")
     public void customer_provides_Scoreone_endpoint_with_Address_at_excel_row_dataset(String arg1) throws Throwable {
@@ -69,6 +72,7 @@ public class Scoreonesteps {
     @When("^post request to scoreone email$")
     public void post_request_to_scoreone_email() throws Throwable {
         response = request.when().post(resources.getscoreonebyemail());
+        Reporter.addStepLog("response"+response.prettyPrint());
     }
     @Given("^customer provides Scoreone endpoint with phone at excel row \"([^\"]*)\" dataset$")
     public void customer_provides_Scoreone_endpoint_with_phone_at_excel_row_dataset(String arg1) throws Throwable {
@@ -87,6 +91,7 @@ public class Scoreonesteps {
     @When("^post request to scoreone phone$")
     public void post_request_to_scoreone_phone() throws Throwable {
         response = request.when().post(resources.getscoreonebyphone());
+        Reporter.addStepLog("response"+response.prettyPrint());
     }
     @Given("^customer provides Scoreone endpoint with summary at excel row \"([^\"]*)\" dataset$")
     public void customer_provides_Scoreone_endpoint_with_summary_at_excel_row_dataset(String arg1) throws Throwable {
@@ -119,6 +124,9 @@ public class Scoreonesteps {
                 header("Content-Type","application/json").
                 header("authorization",DataAccessConf.get().getapikey()).
                 request().body(score).log().body().log().uri().log().headers();
+        String formattedjson=new GsonBuilder().setPrettyPrinting()
+                .create().toJson(score);
+        Reporter.addStepLog("Request "+" "+formattedjson);
     }
 
     public List<model> getmodelsobject(int count,int index,List<HashMap<String,String>> datamap) {
@@ -153,10 +161,12 @@ public class Scoreonesteps {
     @When("^post request to score profile$")
     public void post_request_to_score_profile() throws Throwable {
         response = request.when().post(resources.getscorebyprofile());
+        Reporter.addStepLog("response"+response.prettyPrint());
     }
     @When("^post request to profile score$")
     public void post_request_to_profile_score() throws Throwable {
         response = request.when().post(resources.getscorebyprofileRenamed());
+        Reporter.addStepLog("response"+response.prettyPrint());
     }
 
     @Then("^the status code should be matching for scoreone \"([^\"]*)\"$")
@@ -164,6 +174,7 @@ public class Scoreonesteps {
         int index = Integer.parseInt(arg1)-1;
         json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
         String responseString=response.asString();
+        Reporter.addStepLog("Response code"+" "+response.statusCode());
         Assert.assertNotNull(responseString);
     }
     @Then("^validate Schema for Scoreprofile$")

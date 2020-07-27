@@ -3,6 +3,8 @@ package stepdefination;
 import com.api.pojo.Email;
 import com.api.pojo.Phone;
 import com.api.resources.resources;
+import com.cucumber.listener.Reporter;
+import com.google.gson.GsonBuilder;
 import com.we.api.utilities.DataAccessConf;
 import com.we.api.utilities.DataHelper;
 import cucumber.api.java.Before;
@@ -51,10 +53,14 @@ public class FindonebyPhonesteps {
 				header("Content-Type","application/json").
 				header("authorization",DataAccessConf.get().getapikey()).
 				request().body(phone).log().body().log().uri().log().headers();
+		String formattedjson=new GsonBuilder().setPrettyPrinting()
+				.create().toJson(phone);
+		Reporter.addStepLog("Request "+" "+formattedjson);
 	}
 	@When("^post request to find_one phone basic$")
 	public void post_request_to_find_one_phone_basic() throws Throwable {
 		response = request.when().post(resources.getfindonebyphonebasic());
+		Reporter.addStepLog("response"+response.prettyPrint());
 	}
 
 	@Then("^validateresponse at jsonpath \"([^\"]*)\" and \"([^\"]*)\" at excel row for phone \"([^\"]*)\"$")
@@ -66,12 +72,14 @@ public class FindonebyPhonesteps {
 	@When("^post request to find_one phone full$")
 	public void post_request_to_find_one_phone_full() throws Throwable {
 		response = request.when().post(resources.getfindonebyphonefull());
+		Reporter.addStepLog("response"+response.prettyPrint());
 	}
 
 	@Then("^the status code should be matching for phone \"([^\"]*)\"$")
 	public void the_status_code_should_be_matching_for_phone(String arg1) throws Throwable {
 		int index = Integer.parseInt(arg1)-1;
 		json = response.then().statusCode(Integer.valueOf(datamap.get(index).get("Statuscode"))).log().body();
+		Reporter.addStepLog("Response code"+" "+response.statusCode());
 		String responseString=response.asString();
 		Assert.assertNotNull(responseString);
 	}
