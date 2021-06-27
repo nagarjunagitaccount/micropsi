@@ -12,7 +12,7 @@ you can download community edition  from here https://www.jetbrains.com/idea/dow
 6.Open this project In Intellij Idea
 7.build this project
 8.Run this command in the terminal to execute the testcases "mvn clean test"
-9.on successfully execution you can find the report under the Output folder.
+9.on successfully execution you can find the report under Output folder.
   ex:extentreport.html
 
 
