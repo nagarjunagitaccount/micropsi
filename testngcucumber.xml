@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
 <listeners>
-<listener class-name="com.we.api.utilities.ExtentReporterNG"/>
+<listener class-name="com.micropsi.api.utilities.ExtentReporterNG"/>
 
 </listeners>
-  <test name="PRE TESTS">
+  <test name="Local Tests">
     <classes>
             <class name="TestRunner.CucumberRunner"/>
     </classes>

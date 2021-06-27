@@ -1,183 +1,48 @@
 package com.api.resources;
 
 public class resources {
-	public static String getscoreonebyaddressresource()
+	public static String getdevicesresource()
 	{
-		String res="/v1/score/score_one/by_address";
-		return res;
-		
-	}
-	
-	public static String getfindonebyaddressbybasic()
-	{
-		String res="/v1/profile/find_one/by_address/basic";
-		return res;
-		
-	}
-	public static String getfindonebyaddressbyfull()
-	{
-		String res="/v1/profile/find_one/by_address/full";
+		String res="/devices";
 		return res;
 
 	}
-	public static String getcreatesession()
+	public static String getconnectresource()
 	{
-		String res="/v1/session/create";
+		String res="/connect";
 		return res;
 
 	}
-	public static String getfindonebyemailbasic()
+	public static String getstateresource()
 	{
-		String res="/v1/profile/find_one/by_email/basic";
-
+		String res="/state";
 		return res;
 
 	}
-	public static String getfindonebyemailfull()
+	public static String getbrightnessresource()
 	{
-		String res="/v1/profile/find_one/by_email/full";
+		String res="/brightness";
 		return res;
 
 	}
-	public static String getfindonebyphonefull()
+	public static String getcolorresource()
 	{
-		String res="/v1/profile/find_one/by_phone/full";
+		String res="/color";
 		return res;
 
 	}
-	public static String getfindonebyphonebasic()
+	public static String getnameresource()
 	{
-		String res="/v1/profile/find_one/by_phone/basic";
+		String res="/name";
 		return res;
 
 	}
-
-	public static String getsummarybasic()
+	public static String getdisconnectresource()
 	{
-		String res="/v1/profile/summary/basic";
-		return res;
-
-	}
-	public static String getsummaryfull()
-	{
-		String res="/v1/profile/summary/full";
-		return res;
-
-	}
-	public static String getellucian()
-	{
-		String res="/v1/profile/find_one/ellucian/full";
-		return res;
-
-	}
-	public static String getscoreonebyaddress()
-	{
-		String res="/v1/score/score_one/by_address";
-		return res;
-
-	}
-	public static String getscoreonebyemail()
-	{
-		String res="/v1/score/score_one/by_email";
-		return res;
-
-	}
-	public static String getscoreonebyphone()
-	{
-		String res="/v1/score/score_one/by_phone";
-		return res;
-
-	}
-	public static String getscorebyprofile()
-	{
-		String res="/v1/score/profile";
-		return res;
-
-	}
-	public static String getscorebyprofileRenamed()
-	{
-		String res="/v1/profile/score";
-		return res;
-
-	}
-
-	public static String getscorebyprofiles()
-	{
-		String res="/v1/score/profiles";
-		return res;
-
-	}
-	public static String getscorebyprofilesRenamed()
-	{
-		String res="/v1/profiles/score";
+		String res="/disconnect";
 		return res;
 
 	}
 
 
-
-	public static String getfindmanybasic()
-	{
-		String res="/v1/profile/find_many/basic";
-		return res;
-
-	}
-	public static String getfindmanyfull()
-	{
-		String res="/v1/profile/find_many/full";
-		return res;
-
-	}
-	public static String getprofilesbysummary()
-	{
-		String res="/v1/profiles/summary";
-		return res;
-
-	}
-
-
-
-
-	public static String getjobstatus()
-	{
-		String res="/v1/job/status/{batch_id}";
-		return res;
-
-	}
-
-	public static String getfindmanyresults()
-	{
-		String res="/v1/profile/find_many/results/{batch_id}";
-		return res;
-
-	}
-	public static String getprofilessummaryresults()
-	{
-		String res="/v1/profiles/summary/{batch_id}";
-		return res;
-
-	}
-
-	public static String getscoreprofileresults()
-	{
-		String res="/v1/score/profiles/{batch_id}";
-		return res;
-	}
-	public static String getscoreprofileresultsRenamed()
-	{
-		String res="/v1/profiles/score/{batch_id}";
-		return res;
-	}
-
-
-    public static String getmegacall()
-    {
-        String res="/v1/profile/build_many/details_mc";
-        return res;
-    }
-    public static String getmegacallresults()
-    {
-        String res=" /v1/profile/build_many/results/{batch_id}";
-        return res;
-    }
 }

@@ -25,19 +25,8 @@ import cucumber.api.CucumberOptions;
 
 
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-/*
-@CucumberOptions(
-        features="src/test/java/features", glue = "stepdefination",
-        plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json",
-                "junit:target/cucumber-reports/Cucumber.xml",
-                "testng:target/cucumber-reports/TestngCucumber.xml",
-                "com.cucumber.listener.ExtentCucumberFormatter" ,
-                "html:target/cucumber-reports"},
-      tags = {"@smoke"}
-)
-*/
 
-@CucumberOptions(features = { "src/test/java/features" }, glue = {
+@CucumberOptions(features = { "src/test/java/features/"} , glue = {
         "stepdefination" }, monochrome = true, tags = {"@smoke"},
         plugin = { "pretty", "html:target/cucumber", "json:target/cucumber.json",
                 "com.cucumber.listener.ExtentCucumberFormatter:output/extentreport.html" }
@@ -48,31 +37,10 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 public class CucumberRunner extends AbstractTestNGCucumberTests
 {
-    //@BeforeClass
+
     @AfterClass
     public static void setup() throws IOException {
-/*
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy_hhmmss");
-        Date curDate = new Date();
-        String strDate = sdf.format(curDate);
-        String fileName = System.getProperty("user.dir") + "//target//Extent_Reports//" + strDate + ".html";
 
-
-        File newFile = new File(fileName);
-        ExtentCucumberFormatter.initiateExtentCucumberFormatter(newFile, true);
-
-        // Loads the extent config xml to customize on the report.
-        ExtentCucumberFormatter.loadConfig(new File("src/main/resources/extent-config.xml"));
-
-        // User can add the system information as follows
-
-        // Also you can add system information using a hash map
-        Map systemInfo = new HashMap();
-        systemInfo.put("Cucumber version", "v1.2.3");
-        systemInfo.put("Extent Cucumber Reporter version", "v1.1.0");
-        ExtentCucumberFormatter.addSystemInfo(systemInfo);
-
- */
 
       Reporter.loadXMLConfig(new File("src/main/resources/extent-config.xml"));
 

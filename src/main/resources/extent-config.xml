@@ -20,7 +20,7 @@
     <documentTitle>API</documentTitle>
     <!-- report name - displayed at top-nav -->
 
-    <reportName>WE REST API Cucumber Report</reportName>
+    <reportName>Micropsi REST API Cucumber Report</reportName>
     <!-- location of charts in the test view -->
 
     <!-- top, bottom -->
